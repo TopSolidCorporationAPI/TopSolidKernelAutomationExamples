@@ -29,7 +29,6 @@ namespace ProjectOrganizer
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.listViewProjects = new System.Windows.Forms.ListView();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -44,16 +43,15 @@ namespace ProjectOrganizer
             // listViewProjects
             // 
             this.listViewProjects.AllowColumnReorder = true;
-            this.listViewProjects.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
             this.listViewProjects.CheckBoxes = true;
             this.listViewProjects.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader1,
             this.columnHeader2});
+            this.listViewProjects.Dock = System.Windows.Forms.DockStyle.Fill;
             this.listViewProjects.HideSelection = false;
             this.listViewProjects.Location = new System.Drawing.Point(3, 3);
             this.listViewProjects.Name = "listViewProjects";
-            this.listViewProjects.Size = new System.Drawing.Size(295, 265);
+            this.listViewProjects.Size = new System.Drawing.Size(434, 290);
             this.listViewProjects.TabIndex = 0;
             this.listViewProjects.UseCompatibleStateImageBehavior = false;
             this.listViewProjects.View = System.Windows.Forms.View.Details;
@@ -70,10 +68,11 @@ namespace ProjectOrganizer
             // 
             // btOrganizeProjects
             // 
+            this.btOrganizeProjects.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.btOrganizeProjects.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btOrganizeProjects.Location = new System.Drawing.Point(59, 3);
+            this.btOrganizeProjects.Location = new System.Drawing.Point(39, 7);
             this.btOrganizeProjects.Name = "btOrganizeProjects";
-            this.btOrganizeProjects.Size = new System.Drawing.Size(162, 43);
+            this.btOrganizeProjects.Size = new System.Drawing.Size(103, 43);
             this.btOrganizeProjects.TabIndex = 1;
             this.btOrganizeProjects.Text = "Organize Projects";
             this.btOrganizeProjects.UseVisualStyleBackColor = true;
@@ -82,16 +81,17 @@ namespace ProjectOrganizer
             // tableLayoutPanel1
             // 
             this.tableLayoutPanel1.ColumnCount = 2;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 70F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30F));
             this.tableLayoutPanel1.Controls.Add(this.listViewProjects, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel2, 1, 0);
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(21, 13);
+            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
+            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(10);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 1;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(603, 271);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(629, 296);
             this.tableLayoutPanel1.TabIndex = 2;
             // 
             // tableLayoutPanel2
@@ -102,7 +102,8 @@ namespace ProjectOrganizer
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
             this.tableLayoutPanel2.Controls.Add(this.btOrganizeProjects, 1, 0);
             this.tableLayoutPanel2.Controls.Add(this.btExportPackage, 1, 1);
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(304, 3);
+            this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(443, 3);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 5;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
@@ -110,15 +111,16 @@ namespace ProjectOrganizer
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(281, 249);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(183, 290);
             this.tableLayoutPanel2.TabIndex = 1;
             // 
             // btExportPackage
             // 
+            this.btExportPackage.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.btExportPackage.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btExportPackage.Location = new System.Drawing.Point(59, 52);
+            this.btExportPackage.Location = new System.Drawing.Point(39, 65);
             this.btExportPackage.Name = "btExportPackage";
-            this.btExportPackage.Size = new System.Drawing.Size(162, 43);
+            this.btExportPackage.Size = new System.Drawing.Size(103, 43);
             this.btExportPackage.TabIndex = 1;
             this.btExportPackage.Text = "Export Package";
             this.btExportPackage.UseVisualStyleBackColor = true;
@@ -128,9 +130,8 @@ namespace ProjectOrganizer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(667, 296);
+            this.ClientSize = new System.Drawing.Size(629, 296);
             this.Controls.Add(this.tableLayoutPanel1);
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
             this.Text = "Project Organizer";
             this.Load += new System.EventHandler(this.Form1_Load);

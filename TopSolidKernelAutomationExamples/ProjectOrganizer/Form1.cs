@@ -18,6 +18,7 @@ namespace ProjectOrganizer
         public Form1()
         {
             InitializeComponent();
+            this.Icon = Properties.Resources.TopSolid_APP;
         }
 
         private void Form1_Load(object sender, EventArgs e)

@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{26486C4E-C18B-48FA-A27B-C28BD2EE7071}</ProjectGuid>
+    <ProjectGuid>{55A6F933-BA35-4CC3-A949-3BAB79CE52F9}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>ProjectOrganizer</RootNamespace>
-    <AssemblyName>ProjectOrganizer</AssemblyName>
+    <RootNamespace>DocumentManager</RootNamespace>
+    <AssemblyName>DocumentManager</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
