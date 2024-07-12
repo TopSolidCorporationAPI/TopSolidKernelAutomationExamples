@@ -34,6 +34,11 @@ namespace ProjectOrganizer
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.btOrganizeProjects = new System.Windows.Forms.Button();
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
+            this.btExportPackage = new System.Windows.Forms.Button();
+            this.tableLayoutPanel1.SuspendLayout();
+            this.tableLayoutPanel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // listViewProjects
@@ -46,9 +51,9 @@ namespace ProjectOrganizer
             this.columnHeader1,
             this.columnHeader2});
             this.listViewProjects.HideSelection = false;
-            this.listViewProjects.Location = new System.Drawing.Point(21, 29);
+            this.listViewProjects.Location = new System.Drawing.Point(3, 3);
             this.listViewProjects.Name = "listViewProjects";
-            this.listViewProjects.Size = new System.Drawing.Size(416, 255);
+            this.listViewProjects.Size = new System.Drawing.Size(295, 265);
             this.listViewProjects.TabIndex = 0;
             this.listViewProjects.UseCompatibleStateImageBehavior = false;
             this.listViewProjects.View = System.Windows.Forms.View.Details;
@@ -66,25 +71,71 @@ namespace ProjectOrganizer
             // btOrganizeProjects
             // 
             this.btOrganizeProjects.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btOrganizeProjects.Location = new System.Drawing.Point(456, 221);
+            this.btOrganizeProjects.Location = new System.Drawing.Point(59, 3);
             this.btOrganizeProjects.Name = "btOrganizeProjects";
-            this.btOrganizeProjects.Size = new System.Drawing.Size(194, 63);
+            this.btOrganizeProjects.Size = new System.Drawing.Size(162, 43);
             this.btOrganizeProjects.TabIndex = 1;
             this.btOrganizeProjects.Text = "Organize Projects";
             this.btOrganizeProjects.UseVisualStyleBackColor = true;
             this.btOrganizeProjects.Click += new System.EventHandler(this.btOrganizeProjects_Click);
+            // 
+            // tableLayoutPanel1
+            // 
+            this.tableLayoutPanel1.ColumnCount = 2;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.Controls.Add(this.listViewProjects, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel2, 1, 0);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(21, 13);
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            this.tableLayoutPanel1.RowCount = 1;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(603, 271);
+            this.tableLayoutPanel1.TabIndex = 2;
+            // 
+            // tableLayoutPanel2
+            // 
+            this.tableLayoutPanel2.ColumnCount = 3;
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 60F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableLayoutPanel2.Controls.Add(this.btOrganizeProjects, 1, 0);
+            this.tableLayoutPanel2.Controls.Add(this.btExportPackage, 1, 1);
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(304, 3);
+            this.tableLayoutPanel2.Name = "tableLayoutPanel2";
+            this.tableLayoutPanel2.RowCount = 5;
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(281, 249);
+            this.tableLayoutPanel2.TabIndex = 1;
+            // 
+            // btExportPackage
+            // 
+            this.btExportPackage.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btExportPackage.Location = new System.Drawing.Point(59, 52);
+            this.btExportPackage.Name = "btExportPackage";
+            this.btExportPackage.Size = new System.Drawing.Size(162, 43);
+            this.btExportPackage.TabIndex = 1;
+            this.btExportPackage.Text = "Export Package";
+            this.btExportPackage.UseVisualStyleBackColor = true;
+            this.btExportPackage.Click += new System.EventHandler(this.btExportPackage_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(667, 296);
-            this.Controls.Add(this.btOrganizeProjects);
-            this.Controls.Add(this.listViewProjects);
+            this.Controls.Add(this.tableLayoutPanel1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
             this.Text = "Project Organizer";
             this.Load += new System.EventHandler(this.Form1_Load);
+            this.tableLayoutPanel1.ResumeLayout(false);
+            this.tableLayoutPanel2.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -95,6 +146,9 @@ namespace ProjectOrganizer
         private System.Windows.Forms.ColumnHeader columnHeader1;
         private System.Windows.Forms.ColumnHeader columnHeader2;
         private System.Windows.Forms.Button btOrganizeProjects;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
+        private System.Windows.Forms.Button btExportPackage;
     }
 }
 

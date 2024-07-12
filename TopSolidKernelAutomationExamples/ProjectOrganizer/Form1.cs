@@ -138,5 +138,21 @@ namespace ProjectOrganizer
 
             return Tuple.Create(allDocuments,allFolders);
         }
+
+        private void btExportPackage_Click(object sender, EventArgs e)
+        {
+
+            for (int i = 0; i < listViewProjects.CheckedItems.Count; i++)
+            {
+                PdmObjectId projectToOrganize = (PdmObjectId)listViewProjects.CheckedItems[i].Tag;
+
+                if (projectToOrganize.IsEmpty) continue;
+
+                //set file full path
+                string pathToFile = System.IO.Path.Combine(@"C:\","temp",TopSolidHost.Pdm.GetName(projectToOrganize) + ".TopPkg");
+
+                TopSolidHost.Pdm.ExportPackage(new List<PdmObjectId> { projectToOrganize }, false, false, pathToFile);
+            }      
+        } 
     }
 }
