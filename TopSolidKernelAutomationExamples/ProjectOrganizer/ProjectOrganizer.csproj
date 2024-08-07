@@ -50,6 +50,9 @@
     <Reference Include="TopSolid.Kernel.Automating">
       <HintPath>C:\Program Files\TOPSOLID\TopSolid 7.18\bin\TopSolid.Kernel.Automating.dll</HintPath>
     </Reference>
+    <Reference Include="TopSolidAutomationControls">
+      <HintPath>..\Lib\TopSolidAutomationControls.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Form1.cs">
@@ -88,6 +91,9 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\TopSolid-APP.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Export.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

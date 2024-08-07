@@ -50,6 +50,9 @@
     <Reference Include="TopSolid.Kernel.Automating">
       <HintPath>C:\Program Files\TOPSOLID\TopSolid 7.18\bin\TopSolid.Kernel.Automating.dll</HintPath>
     </Reference>
+    <Reference Include="TopSolidAutomationControls">
+      <HintPath>..\Lib\TopSolidAutomationControls.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Form1.cs">
@@ -58,7 +61,9 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="HelperClass.cs" />
     <Compile Include="Program.cs" />
+    <Compile Include="ProjectData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
@@ -88,6 +93,17 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\TopSolid-APP.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\CheckInCommand.ico" />
+    <EmbeddedResource Include="Resources\CheckOutCommand.ico" />
+    <EmbeddedResource Include="Resources\DeleteCommand.ico" />
+    <EmbeddedResource Include="Resources\OpenDocumentCommand.ico" />
+    <EmbeddedResource Include="Resources\SaveCommand.ico" />
+    <EmbeddedResource Include="Resources\UndoCheckOutCommand.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Import.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
