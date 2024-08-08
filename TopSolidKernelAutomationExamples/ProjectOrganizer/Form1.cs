@@ -139,7 +139,7 @@ namespace ProjectOrganizer
                         TopSolidHost.Pdm.GetConstituents(folder, out List<PdmObjectId> foldersInside, out List<PdmObjectId> documetnsInside);
                         if (foldersInside.Count+documetnsInside.Count==0)
                         {
-                            TopSolidHost.Pdm.DeleteSeveral(new List<PdmObjectId> { folder })
+                            TopSolidHost.Pdm.DeleteSeveral(new List<PdmObjectId> { folder });
                         }
                     }
                 }
