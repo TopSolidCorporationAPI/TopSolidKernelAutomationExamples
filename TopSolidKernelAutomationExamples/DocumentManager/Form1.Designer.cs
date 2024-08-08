@@ -197,7 +197,7 @@ namespace DocumentManager
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
             this.tableLayoutPanel3.RowCount = 1;
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 44F));
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 54F));
             this.tableLayoutPanel3.Size = new System.Drawing.Size(179, 54);
             this.tableLayoutPanel3.TabIndex = 2;
             // 
@@ -209,7 +209,6 @@ namespace DocumentManager
             this.btBrowse.Name = "btBrowse";
             this.btBrowse.Size = new System.Drawing.Size(41, 48);
             this.btBrowse.TabIndex = 0;
-            this.btBrowse.Text = "...";
             this.btBrowse.UseVisualStyleBackColor = true;
             this.btBrowse.Click += new System.EventHandler(this.btBrowse_Click);
             // 

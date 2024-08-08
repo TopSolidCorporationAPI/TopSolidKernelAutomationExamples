@@ -178,7 +178,7 @@ namespace ProjectOrganizer
 
                 if (folderBrowserDialog.ShowDialog() == DialogResult.OK)
                 {
-                    // Get the path of specified file
+                    // Get the path of specified directory
                     string filePath = folderBrowserDialog.SelectedPath;
 
                     this.txtPackagePath.Text = folderBrowserDialog.SelectedPath;
