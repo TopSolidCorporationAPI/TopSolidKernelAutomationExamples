@@ -46,12 +46,12 @@
             this.cmbPrintColorMapping = new System.Windows.Forms.ComboBox();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.btExport = new System.Windows.Forms.Button();
+            this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
+            this.chkChooseRepresentation = new System.Windows.Forms.CheckBox();
+            this.cmbRepresentation = new System.Windows.Forms.ComboBox();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
             this.btBrowse = new System.Windows.Forms.Button();
             this.txtExportPath = new System.Windows.Forms.TextBox();
-            this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
-            this.cmbRepresentation = new System.Windows.Forms.ComboBox();
-            this.chkChooseRepresentation = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -60,14 +60,15 @@
             this.flowLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
-            this.tableLayoutPanel4.SuspendLayout();
             this.flowLayoutPanel2.SuspendLayout();
+            this.tableLayoutPanel4.SuspendLayout();
             this.SuspendLayout();
             // 
             // pdmTreeView1
             // 
             this.pdmTreeView1.CheckBoxes = true;
             this.pdmTreeView1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pdmTreeView1.DocumentTypes = new string[0];
             this.pdmTreeView1.ImageIndex = 0;
             this.pdmTreeView1.Location = new System.Drawing.Point(10, 10);
             this.pdmTreeView1.MultipleCheck = true;
@@ -271,6 +272,39 @@
             this.btExport.UseVisualStyleBackColor = true;
             this.btExport.Click += new System.EventHandler(this.btExport_Click);
             // 
+            // flowLayoutPanel2
+            // 
+            this.flowLayoutPanel2.Controls.Add(this.chkChooseRepresentation);
+            this.flowLayoutPanel2.Controls.Add(this.cmbRepresentation);
+            this.flowLayoutPanel2.Controls.Add(this.tableLayoutPanel4);
+            this.flowLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.flowLayoutPanel2.Location = new System.Drawing.Point(3, 3);
+            this.flowLayoutPanel2.Name = "flowLayoutPanel2";
+            this.flowLayoutPanel2.Size = new System.Drawing.Size(151, 118);
+            this.flowLayoutPanel2.TabIndex = 4;
+            // 
+            // chkChooseRepresentation
+            // 
+            this.chkChooseRepresentation.AutoSize = true;
+            this.chkChooseRepresentation.Location = new System.Drawing.Point(3, 3);
+            this.chkChooseRepresentation.Name = "chkChooseRepresentation";
+            this.chkChooseRepresentation.Size = new System.Drawing.Size(132, 17);
+            this.chkChooseRepresentation.TabIndex = 2;
+            this.chkChooseRepresentation.Text = "Choose representation";
+            this.chkChooseRepresentation.UseVisualStyleBackColor = true;
+            // 
+            // cmbRepresentation
+            // 
+            this.cmbRepresentation.FormattingEnabled = true;
+            this.cmbRepresentation.Items.AddRange(new object[] {
+            "Simplified",
+            "Design",
+            "Detailed"});
+            this.cmbRepresentation.Location = new System.Drawing.Point(3, 26);
+            this.cmbRepresentation.Name = "cmbRepresentation";
+            this.cmbRepresentation.Size = new System.Drawing.Size(141, 21);
+            this.cmbRepresentation.TabIndex = 1;
+            // 
             // tableLayoutPanel4
             // 
             this.tableLayoutPanel4.ColumnCount = 2;
@@ -306,39 +340,6 @@
             this.txtExportPath.Size = new System.Drawing.Size(96, 20);
             this.txtExportPath.TabIndex = 1;
             // 
-            // flowLayoutPanel2
-            // 
-            this.flowLayoutPanel2.Controls.Add(this.chkChooseRepresentation);
-            this.flowLayoutPanel2.Controls.Add(this.cmbRepresentation);
-            this.flowLayoutPanel2.Controls.Add(this.tableLayoutPanel4);
-            this.flowLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.flowLayoutPanel2.Location = new System.Drawing.Point(3, 3);
-            this.flowLayoutPanel2.Name = "flowLayoutPanel2";
-            this.flowLayoutPanel2.Size = new System.Drawing.Size(151, 118);
-            this.flowLayoutPanel2.TabIndex = 4;
-            // 
-            // cmbRepresentation
-            // 
-            this.cmbRepresentation.FormattingEnabled = true;
-            this.cmbRepresentation.Items.AddRange(new object[] {
-            "Simplified",
-            "Design",
-            "Detailed"});
-            this.cmbRepresentation.Location = new System.Drawing.Point(3, 26);
-            this.cmbRepresentation.Name = "cmbRepresentation";
-            this.cmbRepresentation.Size = new System.Drawing.Size(141, 21);
-            this.cmbRepresentation.TabIndex = 1;
-            // 
-            // chkChooseRepresentation
-            // 
-            this.chkChooseRepresentation.AutoSize = true;
-            this.chkChooseRepresentation.Location = new System.Drawing.Point(3, 3);
-            this.chkChooseRepresentation.Name = "chkChooseRepresentation";
-            this.chkChooseRepresentation.Size = new System.Drawing.Size(132, 17);
-            this.chkChooseRepresentation.TabIndex = 2;
-            this.chkChooseRepresentation.Text = "Choose representation";
-            this.chkChooseRepresentation.UseVisualStyleBackColor = true;
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -358,10 +359,10 @@
             this.tableLayoutPanel2.ResumeLayout(false);
             this.tableLayoutPanel2.PerformLayout();
             this.tableLayoutPanel3.ResumeLayout(false);
-            this.tableLayoutPanel4.ResumeLayout(false);
-            this.tableLayoutPanel4.PerformLayout();
             this.flowLayoutPanel2.ResumeLayout(false);
             this.flowLayoutPanel2.PerformLayout();
+            this.tableLayoutPanel4.ResumeLayout(false);
+            this.tableLayoutPanel4.PerformLayout();
             this.ResumeLayout(false);
 
         }

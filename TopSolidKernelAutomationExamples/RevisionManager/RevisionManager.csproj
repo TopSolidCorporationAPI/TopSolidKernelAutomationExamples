@@ -18,7 +18,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
+    <OutputPath>..\Lib\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -27,7 +27,7 @@
     <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
+    <OutputPath>..\Lib\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -48,10 +48,9 @@
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="TopSolid.Kernel.Automating">
-      <HintPath>C:\Program Files\TOPSOLID\TopSolid 7.18\bin\TopSolid.Kernel.Automating.dll</HintPath>
-    </Reference>
-    <Reference Include="TopSolidAutomationControls">
-      <HintPath>..\Lib\TopSolidAutomationControls.dll</HintPath>
+      <SpecificVersion>false</SpecificVersion>
+	  <HintPath>$(OutputPath)\TopSolid.Kernel.Automating.dll</HintPath>
+      <Private>false</Private>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -95,6 +94,12 @@
     <None Include="Images\ValidateMajorRevisionCommand.ico" />
     <None Include="Images\LifeCycleSubStatesDesign.ico" />
     <Content Include="TopSolid-APP.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\TopSolidAutomationControls\TopSolidAutomationControls.csproj">
+      <Project>{af4a8bb1-d229-4d6d-993c-a7f7c155bfaf}</Project>
+      <Name>TopSolidAutomationControls</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
