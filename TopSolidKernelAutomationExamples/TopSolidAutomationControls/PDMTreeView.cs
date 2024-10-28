@@ -253,11 +253,20 @@ namespace TopSolidAutomationControls
                     string imageKey = extensionPdmObject == null ? "file" : extensionPdmObject.ToString();
                     List<string> extensionList = new List<string> { ".TopPrt", ".TopAsm", ".TopFam" };
 
-                    TreeNode treeNode = new TreeNode(TopSolidHost.Pdm.GetName(objectId), 1, 1);
-                    treeNode.Tag = objectId;
-                    treeNode.ImageKey = extensionList.Contains(imageKey) ? imageKey : "file";
-                    treeNode.SelectedImageKey = extensionList.Contains(imageKey) ? imageKey : "file";
-                    treeNode.ImageIndex = 1;
+                    TreeNode treeNode = new TreeNode(TopSolidHost.Pdm.GetName(objectId), 1, 1)
+                    {
+                        ImageIndex = 1,
+                        Tag = objectId,
+                        SelectedImageKey = extensionList.Contains(imageKey) ? imageKey : "file",
+                        ImageKey = extensionList.Contains(imageKey) ? imageKey : "file"
+                    };
+
+                    //treeNode.Tag = objectId;
+                    //treeNode.ImageKey = extensionList.Contains(imageKey) ? imageKey : "file";
+                    //treeNode.SelectedImageKey = extensionList.Contains(imageKey) ? imageKey : "file";
+                    //treeNode.ImageIndex = 1;
+
+
                     inNode.Nodes.Add(treeNode);
                 }
             }
