@@ -30,7 +30,6 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
-            this.projectTreeView = new TopSolidAutomationControls.PDMTreeView();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.revisionTreeView = new System.Windows.Forms.TreeView();
@@ -42,6 +41,8 @@
             this.btValidate = new System.Windows.Forms.Button();
             this.btDelete = new System.Windows.Forms.Button();
             this.currentStateImage = new System.Windows.Forms.PictureBox();
+            this.projectTreeView = new TopSolidAutomationControls.PDMTreeView();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -52,18 +53,6 @@
             this.flowLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.currentStateImage)).BeginInit();
             this.SuspendLayout();
-            // 
-            // projectTreeView
-            // 
-            this.projectTreeView.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.projectTreeView.HideSelection = false;
-            this.projectTreeView.ImageIndex = 0;
-            this.projectTreeView.Location = new System.Drawing.Point(10, 10);
-            this.projectTreeView.Name = "projectTreeView";
-            this.projectTreeView.SelectedImageIndex = 0;
-            this.projectTreeView.Size = new System.Drawing.Size(288, 363);
-            this.projectTreeView.TabIndex = 0;
-            this.projectTreeView.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.projectTreeView_AfterSelect);
             // 
             // splitContainer1
             // 
@@ -213,6 +202,19 @@
             this.currentStateImage.TabIndex = 2;
             this.currentStateImage.TabStop = false;
             // 
+            // projectTreeView
+            // 
+            this.projectTreeView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.projectTreeView.DocumentTypes = new string[0];
+            this.projectTreeView.HideSelection = false;
+            this.projectTreeView.ImageIndex = 0;
+            this.projectTreeView.Location = new System.Drawing.Point(10, 10);
+            this.projectTreeView.Name = "projectTreeView";
+            this.projectTreeView.SelectedImageIndex = 0;
+            this.projectTreeView.Size = new System.Drawing.Size(288, 363);
+            this.projectTreeView.TabIndex = 0;
+            this.projectTreeView.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.projectTreeView_AfterSelect);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -249,6 +251,7 @@
         private System.Windows.Forms.Button btValidate;
         private System.Windows.Forms.Button btDelete;
         private System.Windows.Forms.PictureBox currentStateImage;
+        private System.Windows.Forms.ToolTip toolTip1;
     }
 }
 

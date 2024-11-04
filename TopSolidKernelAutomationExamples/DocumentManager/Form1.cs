@@ -16,6 +16,7 @@ using System.Xml.Linq;
 using TopSolid.Kernel.Automating;
 using static System.Net.Mime.MediaTypeNames;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.ToolBar;
 
 namespace DocumentManager
 {
@@ -38,6 +39,14 @@ namespace DocumentManager
             this.rdbWorkingProjects.Checked = true;
             PopulateProjectList();
 
+            toolTip1.SetToolTip(btOpen, "Open document");
+            toolTip1.SetToolTip(btSave, "Save document");
+            toolTip1.SetToolTip(btUndo, "Undo modifications");
+            toolTip1.SetToolTip(btDelete, "Delete document");
+            toolTip1.SetToolTip(btCheckIn, "Checkin document");
+            toolTip1.SetToolTip(btCheckOut, "Checkout document");
+            toolTip1.IsBalloon = true;
+
         }
 
         //methods related to project list management into this app
@@ -48,7 +57,7 @@ namespace DocumentManager
             {
                 txtPackagePath.Enabled = true;
                 btBrowse.Enabled = true;
-                cmbProjectsList.Items.Clear();               
+                cmbProjectsList.Items.Clear();
             }
             else
             {
@@ -105,7 +114,7 @@ namespace DocumentManager
                 this.cmbProjectsList.Items.Add(new ProjectData(item.Name, item.Id));
             }
 
-        }      
+        }
 
         /// <summary>
         /// Browse for a package to import
@@ -344,7 +353,7 @@ namespace DocumentManager
             {
                 if (e.Node.ImageIndex == 0 || e.Node.ImageKey == "folder")
                 {
-                   CheckTreeNodes(e.Node.Nodes);                    
+                    CheckTreeNodes(e.Node.Nodes);
                 }
             }
             else if (!e.Node.Checked)
@@ -361,7 +370,7 @@ namespace DocumentManager
         public static void CheckTreeNodes(TreeNodeCollection nodes)
         {
             foreach (TreeNode node in nodes)
-            {                
+            {
                 node.Checked = true;
                 // If the current node has child nodes, recursively call the method
                 if (node.Nodes.Count > 0)
@@ -395,6 +404,7 @@ namespace DocumentManager
 
             UpdatePreview(e);
             UpdateParamsList(e);
+            UpdateVirtualMode(e);
         }
 
         #endregion
@@ -525,7 +535,7 @@ namespace DocumentManager
             }
         }
         #endregion
-    
+
         //Modify + clear methods for parameters + UI parameter value display handling
         #region parameter methods
         private void btModify_Click(object sender, EventArgs e)
@@ -539,91 +549,155 @@ namespace DocumentManager
                 docsToModify.Add((PdmObjectId)item);
             }
 
-            if (listViewParams.SelectedItems.Count == 0) return;
+            if (listViewParams.SelectedItems.Count == 0) MessageBox.Show("You need to select a parameter from the list to modify it.");
+
+            if (docsToModify.Count == 0) MessageBox.Show("You need to select a document from the list.");
 
             foreach (PdmObjectId docToModify in docsToModify)
             {
                 DocumentId docIdToModify = TopSolidHost.Documents.GetDocument(docToModify);
 
-                TopSolidHost.Application.StartModification("Modify Parameter", false);
-                try
+                List<ElementId> parameters = TopSolidHost.Parameters.GetParameters(docIdToModify);
+                var findParameter = (from ElementId eltId in parameters
+                                     where TopSolidHost.Elements.GetFriendlyName(eltId) == listViewParams.SelectedItems[0].Text
+                                     select eltId).ToList();
+                if (findParameter.Count == 1)
                 {
-                    TopSolidHost.Documents.EnsureIsDirty(ref docIdToModify);
+                    ParameterType paramType = TopSolidHost.Parameters.GetParameterType(findParameter[0]);
 
-                    List<ElementId> parameters = TopSolidHost.Parameters.GetParameters(docIdToModify);
-                    var findParameter = (from ElementId eltId in parameters
-                                         where TopSolidHost.Elements.GetFriendlyName(eltId) == listViewParams.SelectedItems[0].Text
-                                         select eltId).ToList();
-                    if (findParameter.Count == 1 && listOfParams.TryGetValue(listViewParams.SelectedItems[0].Text, out ParameterType paramType))
+                    if (paramType != ParameterType.Enumeration && paramType != ParameterType.UserEnumeration)
                     {
-                        if (paramType != ParameterType.Enumeration && paramType != ParameterType.UserEnumeration)
+                        string currentValue = HelperClass.GetParameterValue(findParameter[0], paramType);
+
+                        switch (paramType)
                         {
-                            string currentValue = HelperClass.GetParameterValue(findParameter[0], paramType);
-
-                            switch (paramType)
-                            {
-                                case ParameterType.Real:
-                                    if (HelperClass.GetDoubleValue(this.txtParameterValue.Text,out double doubleValue) && currentValue!= doubleValue.ToString())
-                                    {
-                                        TopSolidHost.Parameters.SetRealValue(findParameter[0], doubleValue);
-                                    }
-                                    break;
-                                case ParameterType.Integer:
-                                    if (HelperClass.GetIntValue(this.txtParameterValue.Text, out int intValue) && currentValue != intValue.ToString())
-                                    {
-                                        TopSolidHost.Parameters.SetIntegerValue(findParameter[0], intValue);
-                                    }
-                                    break;
-                                case ParameterType.Text:
-                                    if (HelperClass.GetTextValue(this.txtParameterValue.Text, out string textValue) && currentValue != textValue)
-                                    {
-                                        TopSolidHost.Parameters.SetTextValue(findParameter[0], textValue);
-                                    }
-                                    break;
-                                case ParameterType.Tolerance:
-                                case ParameterType.Color:
-                                case ParameterType.Unclassified:
-                                case ParameterType.None:
-                                case ParameterType.DateTime:
-                                case ParameterType.Family:
-                                case ParameterType.Code:
-                                case ParameterType.Boolean:                               
-                                default:
-                                    MessageBox.Show("This type of parameter is not supported", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                                    break;
-
-                            }
+                            case ParameterType.Real:
+                                if (HelperClass.GetDoubleValue(this.txtParameterValue.Text, out double doubleValue) && currentValue != null && currentValue != doubleValue.ToString())
+                                {
+                                    ModifyParameter<double>(docIdToModify, listViewParams.SelectedItems[0].Text, doubleValue);
+                                }
+                                break;
+                            case ParameterType.Integer:
+                                if (HelperClass.GetIntValue(this.txtParameterValue.Text, out int intValue) && currentValue != null && currentValue != intValue.ToString())
+                                {
+                                    ModifyParameter<int>(docIdToModify, listViewParams.SelectedItems[0].Text, intValue);
+                                }
+                                break;
+                            case ParameterType.Text:
+                                if (HelperClass.GetTextValue(this.txtParameterValue.Text, out string textValue) && currentValue != textValue)
+                                {
+                                    ModifyParameter<string>(docIdToModify, listViewParams.SelectedItems[0].Text, textValue);
+                                }
+                                break;
+                            case ParameterType.Tolerance:
+                            case ParameterType.Color:
+                            case ParameterType.Unclassified:
+                            case ParameterType.None:
+                            case ParameterType.DateTime:
+                            case ParameterType.Family:
+                            case ParameterType.Code:
+                            case ParameterType.Boolean:
+                            default:
+                                MessageBox.Show("This type of parameter is not supported", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                break;
 
                         }
-                        else
+
+                    }
+                    else
+                    {
+                        if (paramType == ParameterType.Enumeration)
                         {
-                            if (paramType == ParameterType.Enumeration)
+                            if (listEnumValues.SelectedIndex != -1)
                             {
-                                if (listEnumValues.SelectedIndex!=-1)
+                                int currentValue = TopSolidHost.Parameters.GetEnumerationValue(findParameter[0]);
+                                if (currentValue != listEnumValues.SelectedIndex + 1)
                                 {
-                                    TopSolidHost.Parameters.SetEnumerationValue(findParameter[0], listEnumValues.SelectedIndex + 1);
-                                }                              
+                                    ModifyParameterEnumeration(docIdToModify, listViewParams.SelectedItems[0].Text,false);                                    
+                                }
                             }
-                            else if (paramType == ParameterType.UserEnumeration)
+                        }
+                        else if (paramType == ParameterType.UserEnumeration)
+                        {
+                            if (listEnumValues.SelectedIndex != -1)
                             {
-                                if (listEnumValues.SelectedIndex != -1)
+                                int currentValue = TopSolidHost.Parameters.GetUserEnumerationValue(findParameter[0]);
+                                if (currentValue != listEnumValues.SelectedIndex + 1)
                                 {
-                                    TopSolidHost.Parameters.SetUserEnumerationValue(findParameter[0], listEnumValues.SelectedIndex + 1);
+                                    ModifyParameterEnumeration(docIdToModify, listViewParams.SelectedItems[0].Text, true);
                                 }
                             }
                         }
                     }
-
-                    TopSolidHost.Application.EndModification(true, true);
-                    //TopSolidHost.Documents.Save(docIdToModify);
-                }
-                catch
-                {
-                    TopSolidHost.Application.EndModification(false, false);
                 }
             }
 
         }
+
+        private void ModifyParameterEnumeration(DocumentId docIdToModify, string parameterName,bool isUser)
+        {
+            TopSolidHost.Application.StartModification("Modify Parameter Enumeration", false);
+            try
+            {
+                TopSolidHost.Documents.EnsureIsDirty(ref docIdToModify);
+
+                List<ElementId> parameters = TopSolidHost.Parameters.GetParameters(docIdToModify);
+                var findParameter = (from ElementId eltId in parameters
+                                     where TopSolidHost.Elements.GetFriendlyName(eltId) == parameterName
+                                     select eltId).ToList();
+
+                if (findParameter != null)
+                { 
+                    if (!isUser)
+                        TopSolidHost.Parameters.SetEnumerationValue(findParameter[0], listEnumValues.SelectedIndex + 1);
+                    else
+                        TopSolidHost.Parameters.SetUserEnumerationValue(findParameter[0], listEnumValues.SelectedIndex + 1);
+                }
+                TopSolidHost.Application.EndModification(true, true);
+
+                //Save eventually
+                //TopSolidHost.Documents.Save(docIdToModify);
+            }
+            catch
+            {
+                TopSolidHost.Application.EndModification(false, false);
+            }
+        }
+
+        private static void ModifyParameter<T>(DocumentId docIdToModify,string parameterName, object value)
+        {
+            TopSolidHost.Application.StartModification("Modify Parameter", false);
+            try
+            {
+                TopSolidHost.Documents.EnsureIsDirty(ref docIdToModify);
+
+                List<ElementId> parameters = TopSolidHost.Parameters.GetParameters(docIdToModify);
+                var findParameter = (from ElementId eltId in parameters
+                                     where TopSolidHost.Elements.GetFriendlyName(eltId) == parameterName
+                                     select eltId).ToList();
+                if (typeof(T)==typeof(double))
+                {
+                    TopSolidHost.Parameters.SetRealValue(findParameter[0], (double)value);
+                }
+                else if (typeof(T) == typeof(int))
+                {
+                    TopSolidHost.Parameters.SetIntegerValue(findParameter[0], (int)value);
+                }
+                else if (typeof(T) == typeof(string))
+                {
+                    TopSolidHost.Parameters.SetTextValue(findParameter[0], (string)value);
+                }
+
+                TopSolidHost.Application.EndModification(true, true);
+
+                //Save eventually
+                //TopSolidHost.Documents.Save(docIdToModify);
+            }
+            catch
+            {
+                TopSolidHost.Application.EndModification(false, false);
+            }
+         }
 
         private void btClear_Click(object sender, EventArgs e)
         {
@@ -638,37 +712,59 @@ namespace DocumentManager
 
             if (listViewParams.SelectedItems.Count == 0) return;
 
+
             foreach (PdmObjectId docToModify in docsToModify)
             {
                 DocumentId docIdToModify = TopSolidHost.Documents.GetDocument(docToModify);
 
-                TopSolidHost.Application.StartModification("Modify Parameter", false);
-                try
-                {
-                    TopSolidHost.Documents.EnsureIsDirty(ref docIdToModify);
+                List<ElementId> parameters = TopSolidHost.Parameters.GetParameters(docIdToModify);
+                var findParameter = (from ElementId eltId in parameters
+                                     where TopSolidHost.Elements.GetFriendlyName(eltId) == listViewParams.SelectedItems[0].Text
+                                     select eltId).ToList();
 
-                    List<ElementId> parameters = TopSolidHost.Parameters.GetParameters(docIdToModify);
-                    var findParameter = (from ElementId eltId in parameters
-                                         where TopSolidHost.Elements.GetFriendlyName(eltId) == listViewParams.SelectedItems[0].Text
-                                         select eltId).ToList();
-                    if (findParameter.Count == 1 && listOfParams.TryGetValue(listViewParams.SelectedItems[0].Text, out ParameterType paramType))
+                if (findParameter.Count == 1)
+                {
+                    ParameterType paramType = TopSolidHost.Parameters.GetParameterType(findParameter[0]);
+                    if (paramType != ParameterType.Enumeration && paramType != ParameterType.UserEnumeration)
                     {
-                        if (paramType != ParameterType.Enumeration && paramType != ParameterType.UserEnumeration)
-                        {
-                            // Nettoyer valeur
-                            TopSolidHost.Parameters.ClearValue(findParameter[0]);
-                        }                        
-                    }
+                        string currentValue = HelperClass.GetParameterValue(findParameter[0], paramType);
 
-                    TopSolidHost.Application.EndModification(true, true);
-                    TopSolidHost.Documents.Save(docIdToModify);
-                }
-                catch
-                {
-                    TopSolidHost.Application.EndModification(false, false);
+                        if (currentValue != null && currentValue.Length > 0)
+                        {
+                            ClearValue(docIdToModify, listViewParams.SelectedItems[0].Text);
+                        }
+                    }
                 }
             }
 
+        }
+
+        private static DocumentId ClearValue(DocumentId docIdToModify, string parameterName)
+        {
+            TopSolidHost.Application.StartModification("Modify Parameter", false);
+            try
+            {
+                TopSolidHost.Documents.EnsureIsDirty(ref docIdToModify);
+
+                List<ElementId> parameters = TopSolidHost.Parameters.GetParameters(docIdToModify);
+                var findParameter = (from ElementId eltId in parameters
+                                     where TopSolidHost.Elements.GetFriendlyName(eltId) == parameterName
+                                     select eltId).ToList();
+
+                // Clean value
+                TopSolidHost.Parameters.ClearValue(findParameter[0]);
+
+                TopSolidHost.Application.EndModification(true, true);
+
+                //Save eventually
+                //TopSolidHost.Documents.Save(docIdToModify);
+            }
+            catch
+            {
+                TopSolidHost.Application.EndModification(false, false);
+            }
+
+            return docIdToModify;
         }
 
         private void UpdateParamsList(TreeViewEventArgs e)
@@ -711,6 +807,17 @@ namespace DocumentManager
             }
         }
 
+        private void UpdateVirtualMode(TreeViewEventArgs e)
+        {
+            PdmObjectId pdmObject = (PdmObjectId)e.Node.Tag;
+            if (pdmObject.IsEmpty) return;
+
+            DocumentId docId = TopSolidHost.Documents.GetDocument(pdmObject);
+            if (docId.IsEmpty) return;
+
+            chkVirtualMode.Checked = TopSolidHost.Documents.IsVirtualDocument(docId);
+        }
+
         private void listViewParams_SelectedIndexChanged(object sender, EventArgs e)
         {
             txtParameterValue.Clear();
@@ -718,6 +825,9 @@ namespace DocumentManager
 
             if (listViewParams.SelectedItems.Count > 0)
             {
+                btClear.Enabled = true;
+                btModify.Enabled = true;
+
                 List<TreeNode> checkedNodes = new List<TreeNode>();
                 GetCheckedFilesNodes(treeViewContent.Nodes, ref checkedNodes);
 
@@ -793,7 +903,52 @@ namespace DocumentManager
                     }
                 }
             }
+            else
+            {
+                btClear.Enabled = false;
+                btModify.Enabled = false;
+            }
+
+
         }
         #endregion
+
+        //set virtual mode if checked
+        private void chkVirtualMode_CheckedChanged(object sender, EventArgs e)
+        {
+            List<PdmObjectId> docsToModify = new List<PdmObjectId>();
+            List<TreeNode> checkedNodes = new List<TreeNode>();
+            GetCheckedFilesNodes(treeViewContent.Nodes, ref checkedNodes);
+            foreach (var item in checkedNodes.Select(x => x.Tag).ToList())
+            {
+                if (item == null) continue;
+                docsToModify.Add((PdmObjectId)item);
+            }
+
+            foreach (PdmObjectId docToModify in docsToModify)
+            {
+                DocumentId docIdToModify = TopSolidHost.Documents.GetDocument(docToModify);
+                if (chkVirtualMode.Checked != TopSolidHost.Documents.IsVirtualDocument(docIdToModify))
+                {
+                    TopSolidHost.Application.StartModification("Modify Parameter", false);
+                    try
+                    {
+                        TopSolidHost.Documents.EnsureIsDirty(ref docIdToModify);
+
+                        TopSolidHost.Documents.SetVirtualDocumentMode(docIdToModify, chkVirtualMode.Checked == true ? true : false);
+
+                        TopSolidHost.Application.EndModification(true, true);
+
+                        //Save eventually
+                        //TopSolidHost.Documents.Save(docIdToModify);
+
+                    }
+                    catch
+                    {
+                        TopSolidHost.Application.EndModification(false, false);
+                    }
+                }
+            }
+        }
     }
 }

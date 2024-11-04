@@ -28,8 +28,17 @@ namespace ExportManager
             PopulateExporterList();
             PopulatePrintLists();
 
+            toolTip1.SetToolTip(btExport, "Export selected documents using selected format");
+            toolTip1.SetToolTip(lbAvailableExportFormats, "Available export formats");
+            toolTip1.SetToolTip(cmbRepresentation, "Available representations");
+            toolTip1.SetToolTip(txtExportPath, "Export path");
+            toolTip1.SetToolTip(pdmTreeView1, "Current project treeview");
+            toolTip1.SetToolTip(btBrowse, "Browse...");
+            toolTip1.SetToolTip(btPrint, "Print selected document with chosen settings");
+            toolTip1.IsBalloon = true;
         }
 
+        //this method populates print lists
         private void PopulatePrintLists()
         {
             cmbPrinterNames.Items.Clear();
@@ -49,6 +58,7 @@ namespace ExportManager
             cmbPrintColorMapping.SelectedIndex = 0;
         }
 
+        //this method populates exporter lists
         private void PopulateExporterList()
         {
             lbAvailableExportFormats.Items.Clear();
@@ -114,7 +124,7 @@ namespace ExportManager
             {
                 if (node.Checked)
                 {
-                    if (node.ImageKey == "file" || node.ImageIndex == 1)
+                    if (node.ImageKey != "folder" || node.ImageIndex == 1)
                     {
                         if (node.Tag != null)
                         {
@@ -181,6 +191,8 @@ namespace ExportManager
                         {                            
                             TopSolidHost.Documents.Export(exporterIndex, documentToExport, filefullPath);
                         }
+
+                        MessageBox.Show(String.Format("Exported with success : {0}",filefullPath));
                     }
                 }
             }
@@ -216,6 +228,12 @@ namespace ExportManager
                     TopSolidHost.Documents.Print(documentToPrint, printColorMapping, 300);
                 }
             }
+        }
+
+        private void chkChooseRepresentation_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkChooseRepresentation.Checked) { cmbRepresentation.Enabled = true; }
+            else { cmbRepresentation.Enabled = false; }
         }
     }
 }

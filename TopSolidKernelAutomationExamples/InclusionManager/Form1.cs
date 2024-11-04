@@ -47,6 +47,7 @@ namespace InclusionManager
             TopSolidHost.Documents.Drop(newDocument);
         }
 
+
         private void btCreateInclusion_Click(object sender, EventArgs e)
         {
             PdmObjectId currentProject = TopSolidHost.Pdm.GetCurrentProject();
@@ -101,7 +102,146 @@ namespace InclusionManager
         }
 
 
+        private void btSlottedMushrooms_Click(object sender, EventArgs e)
+        {
+            PdmObjectId currentProject = TopSolidHost.Pdm.GetCurrentProject();
+
+            //search library into referenced project. If not added, search library and add it to reference. If it does not exist, throw an error
+            PdmObjectId topSolidMechanicalProject = PdmObjectId.Empty;
+            if (!ManageTopSolidMechanicalAddition(currentProject, topSolidMechanicalProject))
+            {
+                throw new Exception("You need to add TopSolid Mechanical Library in order to use this command.");
+            }
+
+            //gets family from library
+            //if needed you can add the family you wish
+            PdmObjectId familyDocumentPdmId = new PdmObjectId("35_6a3bf5c3-631c-47a7-b281-ea0d9b6d7875&393217_54040");
+            if (familyDocumentPdmId.IsEmpty)
+            {
+                throw new Exception("Can't find family document!");
+            }
+
+            DocumentId currentDocument = TopSolidHost.Documents.EditedDocument;
+
+            if (!TopSolidHost.Documents.GetTypeFullName(currentDocument).Contains("AssemblyDocument")) return;
+            DocumentId familyDocument = TopSolidHost.Documents.GetDocument(familyDocumentPdmId);
+
+            try
+            {
+                //start document modification
+                TopSolidHost.Application.StartModification("Check family", false);
+                TopSolidHost.Documents.EnsureIsDirty(ref currentDocument);
+
+                //getting codes from family document
+                List<string> codesList = TopSolidHost.Families.GetCodes(familyDocument);
+                Frame3D frameOrigo = new Frame3D(Point3D.P0, Direction3D.DX, Direction3D.DY, Direction3D.DZ);
+                ElementId frameOrigoPoint = ElementId.Empty;
+
+                Frame3D frameBest = new Frame3D(Point3D.P0, Direction3D.DX, Direction3D.DY, Direction3D.DZ);
+                ElementId frameBestPoint = ElementId.Empty;
+
+                ElementId positioningId = ElementId.Empty;
+                ElementId insertedElement = ElementId.Empty;
+
+                //insertion of each code
+                for (int j = 0; j < codesList.Count; j++)
+                {
+                    string code = codesList[j];
+
+                    //positioning creation (empty for now)
+                    positioningId = TopSolidDesignHost.Assemblies.CreatePositioning(currentDocument);
+
+                    //basic inclusion creation
+                    insertedElement = TopSolidDesignHost.Assemblies.CreateInclusion2(currentDocument, positioningId, code, familyDocument, code, new List<string>(),
+                    new List<SmartObject>(), new List<string>(), new List<SmartDesignObject>(), true, ElementId.Empty,
+                    ElementId.Empty, false, true, true, true, Transform3D.Identity, false);
+
+                    if (!insertedElement.IsEmpty)
+                    {
+                        //getting the inclusion child
+                        ElementId insertedElementId = TopSolidDesignHost.Assemblies.GetInclusionChildOccurrence(insertedElement);
+
+                        //looking for published frames
+                        DocumentId instanceDocument = TopSolidDesignHost.Assemblies.GetOccurrenceDefinition(insertedElementId);
+                        var publishings = TopSolidHost.Entities.GetPublishings(instanceDocument);
+                        foreach (ElementId function in TopSolidHost.Entities.GetFunctions(instanceDocument))
+                        {
+                            foreach (ElementId publishing in TopSolidHost.Entities.GetFunctionPublishings(function))
+                            {
+                                if (TopSolidHost.Elements.GetTypeFullName(publishing).Contains("FrameEntity"))
+                                {
+                                    //as for slotted mushroom, we are looking for top frame.
+                                    //if needed, you can adapt to any other frame of a custom family
+                                    if (TopSolidHost.Elements.GetFriendlyName(publishing).Contains("Top"))
+                                    {
+                                        ElementId corresponding = TopSolidDesignHost.Assemblies.GetOccurrencePublishing(insertedElementId, publishing);
+                                        frameBestPoint = corresponding;
+                                        break;
+                                    }
+                                }
+                            }
+                        }
+
+                        //begining from second occurence, juxtapose occurences by adding frame on frame constraint.
+                        //previous enclosing box is used
+                        if (j > 0)
+                        {
+                            SmartFrame3D frameDestination = new SmartFrame3D(frameOrigoPoint, false);
+                            SmartFrame3D frameSource = new SmartFrame3D(frameBestPoint, false);
+                            SmartReal offsetDistance = new SmartReal(UnitType.Length, 0);
+                            SmartReal rotationAngle = new SmartReal(UnitType.Angle, 0);
+                            SmartReal yRotationAngle = new SmartReal(UnitType.Angle, 0);
+                            SmartReal zRotationAngle = new SmartReal(UnitType.Angle, 0);
+
+                            TopSolidDesignHost.Assemblies.CreateFrameOnFrameConstraint(positioningId, frameSource, frameDestination, offsetDistance, true, rotationAngle,
+                                false, yRotationAngle, false, zRotationAngle, false, false);
+                        }
+
+                        //look for enclosing box limit on X axis
+                        double Xmax = 0;
+                        double Xmin = 0;
+                        foreach (ElementId element in TopSolidHost.Elements.GetConstituents(insertedElementId))
+                        {
+                            if (TopSolidHost.Elements.GetTypeFullName(element).Contains("ShapeEntity"))
+                            {
+                                foreach (ElementItemId face in TopSolidHost.Shapes.GetFaces(element))
+                                {
+                                    TopSolidHost.Shapes.GetFaceEnclosingCoordinatesWithGivenFrame(face, Frame3D.OXYZ,
+                                        out double xmin, out double xmax, out _, out _, out _, out _);
+                                    if (xmax > Xmax)
+                                        Xmax = xmax;
+                                    if (xmin < Xmin)
+                                        Xmin = xmin;
+                                }
+                            }
+                        }
+
+                        //create new frame which will be used for next code
+                        Frame3D frameBestNew = new Frame3D(new Point3D(frameBest.Origin.X + (Xmax - Xmin)+0.005, frameBest.Origin.Y, frameBest.Origin.Z), Direction3D.DX, Direction3D.DY, Direction3D.DZ);
+                        frameOrigoPoint = TopSolidHost.Geometries3D.CreateFrame(currentDocument, frameBestNew);
+
+                        frameBest = frameBestNew;
+
+                    }
+                }
+                TopSolidHost.Application.EndModification(true, true);
+            }
+            catch (Exception ee)
+            {
+                TopSolidHost.Application.EndModification(false, false);
+            }
+
+
+        }
+
+
+
         #region private methods
+        /// <summary>
+        /// Private method to create a part document and add a sketch and an extruded shape
+        /// </summary>
+        /// <param name="currentProject"></param>
+        /// <returns></returns>
         private PdmObjectId CreateAndFillPartDocument(PdmObjectId currentProject)
         {
             //1-first, create a new part document
@@ -169,128 +309,8 @@ namespace InclusionManager
 
             return newDocPdm;
         }
-        #endregion
 
-        private void btSlottedMushrooms_Click(object sender, EventArgs e)
-        {
-            PdmObjectId currentProject = TopSolidHost.Pdm.GetCurrentProject();
-
-            //search library into referenced project. If not added, search library and add it to reference. If it does not exist, throw an error
-            PdmObjectId topSolidMechanicalProject = PdmObjectId.Empty;
-            if (!ManageTopSolidMechanicalAddition(currentProject, topSolidMechanicalProject))
-            {
-                throw new Exception("You need to add TopSolid Mechanical Library in order to use this command.");
-            }
-
-            //gets family from library
-            PdmObjectId familyDocumentPdmId = new PdmObjectId("35_6a3bf5c3-631c-47a7-b281-ea0d9b6d7875&393217_54040");
-            if (familyDocumentPdmId.IsEmpty)
-            {
-                throw new Exception("Can't find family document!");
-            }
-
-            DocumentId currentDocument = TopSolidHost.Documents.EditedDocument;
-
-            if (!TopSolidHost.Documents.GetTypeFullName(currentDocument).Contains("AssemblyDocument")) return;
-            DocumentId familyDocument = TopSolidHost.Documents.GetDocument(familyDocumentPdmId);
-
-            try
-            {
-                //start document modification
-                TopSolidHost.Application.StartModification("Check family", false);
-                TopSolidHost.Documents.EnsureIsDirty(ref currentDocument);
-
-                List<string> codesList = TopSolidHost.Families.GetCodes(familyDocument);
-                Frame3D frameOrigo = new Frame3D(Point3D.P0, Direction3D.DX, Direction3D.DY, Direction3D.DZ);
-                ElementId frameOrigoPoint = ElementId.Empty;
-
-                Frame3D frameBest = new Frame3D(Point3D.P0, Direction3D.DX, Direction3D.DY, Direction3D.DZ);
-                ElementId frameBestPoint = ElementId.Empty;
-
-                ElementId positioningId = ElementId.Empty;
-                ElementId insertedElement = ElementId.Empty;
-
-                for (int j = 0; j < codesList.Count; j++)
-                {
-                    string code = codesList[j];
-
-                    positioningId = TopSolidDesignHost.Assemblies.CreatePositioning(currentDocument);
-
-                    insertedElement = TopSolidDesignHost.Assemblies.CreateInclusion2(currentDocument, positioningId, code, familyDocument, code, new List<string>(),
-                    new List<SmartObject>(), new List<string>(), new List<SmartDesignObject>(), true, ElementId.Empty,
-                    ElementId.Empty, false, true, true, true, Transform3D.Identity, false);
-
-                    if (!insertedElement.IsEmpty)
-                    {
-                        //récupération de l'inclusion
-                        ElementId insertedElementId = TopSolidDesignHost.Assemblies.GetInclusionChildOccurrence(insertedElement);
-
-                        DocumentId instanceDocument = TopSolidDesignHost.Assemblies.GetOccurrenceDefinition(insertedElementId);
-                        var publishings = TopSolidHost.Entities.GetPublishings(instanceDocument);
-                        foreach (ElementId function in TopSolidHost.Entities.GetFunctions(instanceDocument))
-                        {
-                            foreach (ElementId publishing in TopSolidHost.Entities.GetFunctionPublishings(function))
-                            {
-                                if (TopSolidHost.Elements.GetTypeFullName(publishing).Contains("FrameEntity"))
-                                {
-                                    if (TopSolidHost.Elements.GetFriendlyName(publishing).Contains("Top"))
-                                    {
-                                        ElementId corresponding = TopSolidDesignHost.Assemblies.GetOccurrencePublishing(insertedElementId, publishing);
-                                        frameBestPoint = corresponding;
-                                        break;
-                                    }
-                                }
-                            }
-                        }
-
-                        if (j > 0)
-                        {
-                            SmartFrame3D frameDestination = new SmartFrame3D(frameOrigoPoint, false);
-                            SmartFrame3D frameSource = new SmartFrame3D(frameBestPoint, false);
-                            SmartReal offsetDistance = new SmartReal(UnitType.Length, 0);
-                            SmartReal rotationAngle = new SmartReal(UnitType.Angle, 0);
-                            SmartReal yRotationAngle = new SmartReal(UnitType.Angle, 0);
-                            SmartReal zRotationAngle = new SmartReal(UnitType.Angle, 0);
-
-                            TopSolidDesignHost.Assemblies.CreateFrameOnFrameConstraint(positioningId, frameSource, frameDestination, offsetDistance, true, rotationAngle,
-                                false, yRotationAngle, false, zRotationAngle, false, false);
-                        }
-
-                        double Xmax = 0;
-                        double Xmin = 0;
-                        foreach (ElementId element in TopSolidHost.Elements.GetConstituents(insertedElementId))
-                        {
-                            if (TopSolidHost.Elements.GetTypeFullName(element).Contains("ShapeEntity"))
-                            {
-                                foreach (ElementItemId face in TopSolidHost.Shapes.GetFaces(element))
-                                {
-                                    TopSolidHost.Shapes.GetFaceEnclosingCoordinatesWithGivenFrame(face, Frame3D.OXYZ,
-                                        out double xmin, out double xmax, out _, out _, out _, out _);
-                                    if (xmax > Xmax)
-                                        Xmax = xmax;
-                                    if (xmin < Xmin)
-                                        Xmin = xmin;
-                                }
-                            }
-                        }
-
-                        Frame3D frameBestNew = new Frame3D(new Point3D(frameBest.Origin.X + (Xmax - Xmin)+0.005, frameBest.Origin.Y, frameBest.Origin.Z), Direction3D.DX, Direction3D.DY, Direction3D.DZ);
-                        frameOrigoPoint = TopSolidHost.Geometries3D.CreateFrame(currentDocument, frameBestNew);
-
-                        frameBest = frameBestNew;
-
-                    }
-                }
-                TopSolidHost.Application.EndModification(true, true);
-            }
-            catch (Exception ee)
-            {
-                TopSolidHost.Application.EndModification(false, false);
-            }
-
-
-        }
-
+        //this methods adds target project to reference if it is not already added
         private static bool ManageTopSolidMechanicalAddition(PdmObjectId currentProject, PdmObjectId outTopSolidMechanicalProject)
         {
             foreach (PdmObjectId referencedProject in TopSolidHost.Pdm.GetReferencedProjects(currentProject))
@@ -314,5 +334,8 @@ namespace InclusionManager
 
             return false;
         }
+        #endregion
+
+
     }
 }

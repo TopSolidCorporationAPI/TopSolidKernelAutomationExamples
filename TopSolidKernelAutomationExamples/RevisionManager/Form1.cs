@@ -17,6 +17,14 @@ namespace RevisionManager
         public Form1()
         {
             InitializeComponent();
+
+            toolTip1.SetToolTip(btOpen, "Open selected revision");
+            toolTip1.SetToolTip(btObsolete, "Mark as obsolete");
+            toolTip1.SetToolTip(btDelete, "Delete revision (not obsolete)");
+            toolTip1.SetToolTip(btValidate, "Validate revision");
+            toolTip1.SetToolTip(projectTreeView, "Current project treeview");
+            toolTip1.SetToolTip(revisionTreeView, "List of revisions");
+            toolTip1.IsBalloon = true;
         }
 
         #region methods to display revisions and properties of revisions
@@ -75,6 +83,8 @@ namespace RevisionManager
 
         #region LifeCycleState modifications methods
 
+        //mark major revision as obsolete
+        //can only be performed on validated state.
         private void btObsolete_Click(object sender, EventArgs e)
         {
             PdmMajorRevisionId majorRevision = GetMajorRevisionFromTreeView(revisionTreeView.SelectedNode);
@@ -92,6 +102,8 @@ namespace RevisionManager
             }            
         }
 
+        //delete major revision.
+        //be careful, obsolete state cannot be deleted.
         private void btDelete_Click(object sender, EventArgs e)
         {
             PdmMajorRevisionId majorRevision = GetMajorRevisionFromTreeView(revisionTreeView.SelectedNode);
@@ -109,6 +121,8 @@ namespace RevisionManager
             }
         }
 
+        //validate major revision
+        //only design and obsolete can be validated.
         private void btValidate_Click(object sender, EventArgs e)
         {
             PdmMajorRevisionId majorRevision = GetMajorRevisionFromTreeView(revisionTreeView.SelectedNode);
@@ -134,6 +148,8 @@ namespace RevisionManager
         //if the document is not last minor revision of last major revision, it will be opened in read-only mode
         private void btOpen_Click(object sender, EventArgs e)
         {
+            if (revisionTreeView.SelectedNode.Tag == null) return;
+
             PdmMinorRevisionId minorRevisionId = (PdmMinorRevisionId)revisionTreeView.SelectedNode.Tag;
             if (minorRevisionId.IsEmpty) return;
 
@@ -146,6 +162,8 @@ namespace RevisionManager
         private PdmMajorRevisionId GetMajorRevisionFromTreeView(TreeNode inSelectedNode)
         {
             if (revisionTreeView.SelectedNode == null) return PdmMajorRevisionId.Empty;
+
+            if (revisionTreeView.SelectedNode.Tag == null) return PdmMajorRevisionId.Empty;
 
             PdmMinorRevisionId minorRevisionId = (PdmMinorRevisionId)revisionTreeView.SelectedNode.Tag;
             if (minorRevisionId.IsEmpty) return PdmMajorRevisionId.Empty;
@@ -180,6 +198,5 @@ namespace RevisionManager
         }
 
         #endregion
-
     }
 }

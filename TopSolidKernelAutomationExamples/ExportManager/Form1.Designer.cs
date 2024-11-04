@@ -52,6 +52,7 @@
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
             this.btBrowse = new System.Windows.Forms.Button();
             this.txtExportPath = new System.Windows.Forms.TextBox();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -292,9 +293,11 @@
             this.chkChooseRepresentation.TabIndex = 2;
             this.chkChooseRepresentation.Text = "Choose representation";
             this.chkChooseRepresentation.UseVisualStyleBackColor = true;
+            this.chkChooseRepresentation.CheckedChanged += new System.EventHandler(this.chkChooseRepresentation_CheckedChanged);
             // 
             // cmbRepresentation
             // 
+            this.cmbRepresentation.Enabled = false;
             this.cmbRepresentation.FormattingEnabled = true;
             this.cmbRepresentation.Items.AddRange(new object[] {
             "Simplified",
@@ -391,6 +394,7 @@
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel2;
         private System.Windows.Forms.ComboBox cmbRepresentation;
         private System.Windows.Forms.CheckBox chkChooseRepresentation;
+        private System.Windows.Forms.ToolTip toolTip1;
     }
 }
 

@@ -62,6 +62,8 @@ namespace DocumentManager
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.btModify = new System.Windows.Forms.Button();
             this.btClear = new System.Windows.Forms.Button();
+            this.chkVirtualMode = new System.Windows.Forms.CheckBox();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.picBoxPreview)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel4.SuspendLayout();
@@ -417,13 +419,15 @@ namespace DocumentManager
             this.tableLayoutPanel6.Controls.Add(this.listEnumValues, 0, 0);
             this.tableLayoutPanel6.Controls.Add(this.txtParameterValue, 0, 1);
             this.tableLayoutPanel6.Controls.Add(this.flowLayoutPanel1, 1, 1);
+            this.tableLayoutPanel6.Controls.Add(this.chkVirtualMode, 0, 2);
             this.tableLayoutPanel6.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel6.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel6.Margin = new System.Windows.Forms.Padding(10, 3, 10, 3);
             this.tableLayoutPanel6.Name = "tableLayoutPanel6";
-            this.tableLayoutPanel6.RowCount = 2;
-            this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 60.81871F));
-            this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 39.18129F));
+            this.tableLayoutPanel6.RowCount = 3;
+            this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 52.88583F));
+            this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 40F));
+            this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 7.272727F));
             this.tableLayoutPanel6.Size = new System.Drawing.Size(256, 465);
             this.tableLayoutPanel6.TabIndex = 0;
             // 
@@ -432,7 +436,7 @@ namespace DocumentManager
             this.listEnumValues.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.listEnumValues.FormattingEnabled = true;
-            this.listEnumValues.Location = new System.Drawing.Point(10, 151);
+            this.listEnumValues.Location = new System.Drawing.Point(10, 114);
             this.listEnumValues.Margin = new System.Windows.Forms.Padding(10);
             this.listEnumValues.Name = "listEnumValues";
             this.listEnumValues.Size = new System.Drawing.Size(128, 121);
@@ -442,7 +446,7 @@ namespace DocumentManager
             // 
             this.txtParameterValue.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtParameterValue.Location = new System.Drawing.Point(10, 285);
+            this.txtParameterValue.Location = new System.Drawing.Point(10, 248);
             this.txtParameterValue.Margin = new System.Windows.Forms.Padding(10, 3, 10, 3);
             this.txtParameterValue.Name = "txtParameterValue";
             this.txtParameterValue.Size = new System.Drawing.Size(128, 20);
@@ -453,15 +457,16 @@ namespace DocumentManager
             this.flowLayoutPanel1.Controls.Add(this.btModify);
             this.flowLayoutPanel1.Controls.Add(this.btClear);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(151, 285);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(151, 248);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(102, 177);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(102, 179);
             this.flowLayoutPanel1.TabIndex = 3;
             // 
             // btModify
             // 
             this.btModify.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.btModify.Enabled = false;
             this.btModify.Location = new System.Drawing.Point(3, 3);
             this.btModify.Name = "btModify";
             this.btModify.Size = new System.Drawing.Size(77, 23);
@@ -474,6 +479,7 @@ namespace DocumentManager
             // 
             this.btClear.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.btClear.Enabled = false;
             this.btClear.Location = new System.Drawing.Point(3, 32);
             this.btClear.Name = "btClear";
             this.btClear.Size = new System.Drawing.Size(77, 23);
@@ -481,6 +487,19 @@ namespace DocumentManager
             this.btClear.Text = "Clear";
             this.btClear.UseVisualStyleBackColor = true;
             this.btClear.Click += new System.EventHandler(this.btClear_Click);
+            // 
+            // chkVirtualMode
+            // 
+            this.chkVirtualMode.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.chkVirtualMode.AutoSize = true;
+            this.chkVirtualMode.Location = new System.Drawing.Point(3, 433);
+            this.chkVirtualMode.Name = "chkVirtualMode";
+            this.chkVirtualMode.Size = new System.Drawing.Size(84, 29);
+            this.chkVirtualMode.TabIndex = 4;
+            this.chkVirtualMode.Text = "Virtual mode";
+            this.chkVirtualMode.UseVisualStyleBackColor = true;
+            this.chkVirtualMode.CheckedChanged += new System.EventHandler(this.chkVirtualMode_CheckedChanged);
             // 
             // Form1
             // 
@@ -491,6 +510,7 @@ namespace DocumentManager
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
             this.Text = "Document Manager";
+            this.TopMost = true;
             ((System.ComponentModel.ISupportInitialize)(this.picBoxPreview)).EndInit();
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel4.ResumeLayout(false);
@@ -545,6 +565,8 @@ namespace DocumentManager
         private System.Windows.Forms.Button btModify;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.Button btClear;
+        private System.Windows.Forms.CheckBox chkVirtualMode;
+        private System.Windows.Forms.ToolTip toolTip1;
     }
 }
 
