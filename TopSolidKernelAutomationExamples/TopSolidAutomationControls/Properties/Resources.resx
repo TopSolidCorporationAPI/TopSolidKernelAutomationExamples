@@ -1,0 +1,427 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="AssemblyDocument" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\icons\AssemblyDocument.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="AssemblyFunctionDocument" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\icons\AssemblyFunctionDocument.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="AutomaticMachiningLogDocument" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\icons\AutomaticMachiningLogDocument.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="BomDocument" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\icons\BomDocument.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="BoxMarginsRulesDocument" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\icons\BoxMarginsRulesDocument.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ClassificationDocument" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\icons\ClassificationDocument.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ClearanceHoleStandardDocument" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\icons\ClearanceHoleStandardDocument.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CoatingDocument" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\icons\CoatingDocument.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ConfigurationDocument" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\icons\ConfigurationDocument.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CustomCoolantDocument" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\icons\CustomCoolantDocument.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CustomLeadDocument" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\icons\CustomLeadDocument.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CuttingConditionsDocument" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\icons\CuttingConditionsDocument.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CylinderMarginsRulesDocument" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\icons\CylinderMarginsRulesDocument.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CylinderTopologyAssociationsDocument" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\icons\CylinderTopologyAssociationsDocument.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="DimensionalToleranceStandardDocument" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\icons\DimensionalToleranceStandardDocument.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Document" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\icons\Document.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="DrawingDocument" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\icons\DrawingDocument.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="DrivingFamilyDocument" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\icons\DrivingFamilyDocument.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="EnumerationDocument" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\icons\EnumerationDocument.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="EnvironmentDocument" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\icons\EnvironmentDocument.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ExplodedDocument" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\icons\ExplodedDocument.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="FamilyDocument" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\icons\FamilyDocument.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="FeaturesPostProcessingDocument" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\icons\FeaturesPostProcessingDocument.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="FeaturesToolNumberingDocument" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\icons\FeaturesToolNumberingDocument.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="fileNew" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\fileNew.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="FinishingDocument" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\icons\FinishingDocument.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Folder" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\icons\Folder.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="folderNEW" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\folderNEW.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="FunctionDocument" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\icons\FunctionDocument.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="LinkMovementsDocument" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\icons\LinkMovementsDocument.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="MachineLinkMovementsRulesDocument" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\icons\MachineLinkMovementsRulesDocument.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="MachiningProcessesDocument" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\icons\MachiningProcessesDocument.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="MasterPartsTreeView_OpenSlavePartDocument" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\icons\MasterPartsTreeView.OpenSlavePartDocument.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="MasterPartsTreeView_RebuildSlavePartDocument" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\icons\MasterPartsTreeView.RebuildSlavePartDocument.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="MaterialDocument" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\icons\MaterialDocument.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="MaterialEquivalencesDocument" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\icons\MaterialEquivalencesDocument.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="MethodDocument" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\icons\MethodDocument.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="MillTurnDocument" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\icons\MillTurnDocument.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="MillTurnMethodDocument" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\icons\MillTurnMethodDocument.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ModelingDocument" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\icons\ModelingDocument.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="MultilayerMaterialDocument" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\icons\MultilayerMaterialDocument.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="MultilayerPlateDocument" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\icons\MultilayerPlateDocument.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="NameParentDocument" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\icons\NameParentDocument.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="NCDocument" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\icons\NCDocument.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="NCFilesDocument" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\icons\NCFilesDocument.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="NCMachineComponentDocument" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\icons\NCMachineComponentDocument.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="NCMachineDocument" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\icons\NCMachineDocument.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="NestingDocument" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\icons\NestingDocument.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="OldPartSettingDocument" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\icons\OldPartSettingDocument.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="OpenDocument" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\icons\OpenDocument.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="OperationConfigurationDocument" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\icons\OperationConfigurationDocument.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="PackageProjectTreeView_DefaultDocument" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\icons\PackageProjectTreeView.DefaultDocument.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ParameterSourceTechnologyDocument" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\icons\ParameterSourceTechnologyDocument.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="PartDocument" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\icons\PartDocument.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="PartFunctionDocument" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\icons\PartFunctionDocument.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="PartPositioningDocument" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\icons\PartPositioningDocument.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="PartProcessDocument" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\icons\PartProcessDocument.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="PartSettingDocument" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\icons\PartSettingDocument.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="PdmDictionaryDocument" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\icons\PdmDictionaryDocument.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="PeckingDocument" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\icons\PeckingDocument.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="PipingRulesDocument" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\icons\PipingRulesDocument.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ProcessDefinitionDocument" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\icons\ProcessDefinitionDocument.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ProcessMethodAssociationsDocument" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\icons\ProcessMethodAssociationsDocument.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ProcessRulesDocument" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\icons\ProcessRulesDocument.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ProjectDocument" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\icons\ProjectDocument.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ProjectsManager_ConsultProjectMainDocument" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\icons\ProjectsManager.ConsultProjectMainDocument.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ProjectsManager_OpenProjectMainDocument" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\icons\ProjectsManager.OpenProjectMainDocument.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="PropertiesFilterDocument" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\icons\PropertiesFilterDocument.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ReportDefinitionDocument" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\icons\ReportDefinitionDocument.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="RepositioningTypeSameDocument" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\icons\RepositioningTypeSameDocument.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Resources_ConsultDocument" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\icons\Resources.ConsultDocument.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Resources_FamilyDocument" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\icons\Resources.FamilyDocument.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Resources_NCDocument" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\icons\Resources.NCDocument.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ScrewSpotFacingStandardDocument" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\icons\ScrewSpotFacingStandardDocument.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SettingsDocument" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\icons\SettingsDocument.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SheetMetalConfigurationDocument" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\icons\SheetMetalConfigurationDocument.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SheetMetalConfigurationDocumentWindowFactory_SheetMetalConfigurationDocument" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\icons\SheetMetalConfigurationDocumentWindowFactory.SheetMetalConfigurationDocument.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SheetMetalCutTechnologyDocument" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\icons\SheetMetalCutTechnologyDocument.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SheetMetalDocument" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\icons\SheetMetalDocument.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SheetMetalEvacuationRulesDocument" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\icons\SheetMetalEvacuationRulesDocument.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SheetMetalPunchTechnologyDocument" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\icons\SheetMetalPunchTechnologyDocument.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SheetMetalTurretDocument" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\icons\SheetMetalTurretDocument.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="StaircaseConstraintsRulesDocument" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\icons\StaircaseConstraintsRulesDocument.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="StandardLeadsTableDocument" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\icons\StandardLeadsTableDocument.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="StudioDocument" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\icons\StudioDocument.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="TextureDocument" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\icons\TextureDocument.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ThreadingStandardDocument" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\icons\ThreadingStandardDocument.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="UnfoldingDocument" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\icons\UnfoldingDocument.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="UnfoldingRulesDocument" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\icons\UnfoldingRulesDocument.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="UserParametersDocument" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\icons\UserParametersDocument.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="UserPropertyDocument" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\icons\UserPropertyDocument.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="WireDocument" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\icons\WireDocument.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="WireMethodDocument" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\icons\WireMethodDocument.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="WireTechnologyDocument" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\icons\WireTechnologyDocument.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="WizardDocument" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\icons\WizardDocument.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="WizardRulesDocument" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\icons\WizardRulesDocument.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="WoodDocument" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\icons\WoodDocument.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="WoodMethodDocument" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\icons\WoodMethodDocument.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="WOPExportSettingsDocument" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\icons\WOPExportSettingsDocument.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="WordPPDocument" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\icons\WordPPDocument.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="WorkspaceBackgroundDocument" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\icons\WorkspaceBackgroundDocument.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="WorkspacesManagerDocument" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\icons\WorkspacesManagerDocument.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+</root>

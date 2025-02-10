@@ -1,0 +1,392 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{AF4A8BB1-D229-4D6D-993C-A7F7C155BFAF}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>TopSolidAutomationControls</RootNamespace>
+    <AssemblyName>TopSolidAutomationControls</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\Lib\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\Lib\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="TopSolid.Kernel.Automating">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(OutputPath)\TopSolid.Kernel.Automating.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="DocumentSelector.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="DocumentSelector.Designer.cs">
+      <DependentUpon>DocumentSelector.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PdmTools.cs" />
+    <Compile Include="PDMTreeView.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="PDMTreeView.Designer.cs">
+      <DependentUpon>PDMTreeView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ProjectSelector.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ProjectSelector.Designer.cs">
+      <DependentUpon>ProjectSelector.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Service Include="{94E38DFF-614B-4cbd-B67C-F211BB35CE8B}" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="DocumentSelector.resx">
+      <DependentUpon>DocumentSelector.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PDMTreeView.resx">
+      <DependentUpon>PDMTreeView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="folderNEW.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="fileNew.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="icons\AssemblyDocument.ico" />
+    <EmbeddedResource Include="icons\FamilyDocument.ico" />
+    <EmbeddedResource Include="icons\PartDocument.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="icons\AssemblyFunctionDocument.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="icons\AutomaticMachiningLogDocument.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="icons\BomDocument.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="icons\BoxMarginsRulesDocument.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="icons\ClassificationDocument.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="icons\ClearanceHoleStandardDocument.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="icons\CoatingDocument.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="icons\ConfigurationDocument.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="icons\CustomCoolantDocument.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="icons\CustomLeadDocument.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="icons\CuttingConditionsDocument.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="icons\CylinderMarginsRulesDocument.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="icons\CylinderTopologyAssociationsDocument.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="icons\DimensionalToleranceStandardDocument.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="icons\Document.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="icons\DrawingDocument.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="icons\DrivingFamilyDocument.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="icons\EnumerationDocument.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="icons\EnvironmentDocument.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="icons\ExplodedDocument.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="icons\FeaturesPostProcessingDocument.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="icons\FeaturesToolNumberingDocument.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="icons\FinishingDocument.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="icons\FunctionDocument.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="icons\LinkMovementsDocument.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="icons\MachineLinkMovementsRulesDocument.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="icons\MachiningProcessesDocument.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="icons\MasterPartsTreeView.OpenSlavePartDocument.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="icons\MasterPartsTreeView.RebuildSlavePartDocument.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="icons\MaterialDocument.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="icons\MaterialEquivalencesDocument.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="icons\MethodDocument.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="icons\MillTurnDocument.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="icons\MillTurnMethodDocument.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="icons\ModelingDocument.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="icons\MultilayerMaterialDocument.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="icons\MultilayerPlateDocument.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="icons\NameParentDocument.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="icons\NCDocument.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="icons\NCFilesDocument.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="icons\NCMachineComponentDocument.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="icons\NCMachineDocument.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="icons\NestingDocument.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="icons\OldPartSettingDocument.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="icons\OpenDocument.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="icons\OperationConfigurationDocument.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="icons\PackageProjectTreeView.DefaultDocument.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="icons\ParameterSourceTechnologyDocument.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="icons\PartFunctionDocument.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="icons\PartPositioningDocument.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="icons\PartProcessDocument.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="icons\PartSettingDocument.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="icons\PdmDictionaryDocument.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="icons\PeckingDocument.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="icons\PipingRulesDocument.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="icons\ProcessDefinitionDocument.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="icons\ProcessMethodAssociationsDocument.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="icons\ProcessRulesDocument.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="icons\ProjectDocument.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="icons\ProjectsManager.ConsultProjectMainDocument.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="icons\ProjectsManager.OpenProjectMainDocument.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="icons\PropertiesFilterDocument.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="icons\ReportDefinitionDocument.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="icons\RepositioningTypeSameDocument.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="icons\Resources.ConsultDocument.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="icons\Resources.FamilyDocument.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="icons\Resources.NCDocument.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="icons\ScrewSpotFacingStandardDocument.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="icons\SettingsDocument.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="icons\SheetMetalConfigurationDocument.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="icons\SheetMetalConfigurationDocumentWindowFactory.SheetMetalConfigurationDocument.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="icons\SheetMetalCutTechnologyDocument.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="icons\SheetMetalDocument.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="icons\SheetMetalEvacuationRulesDocument.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="icons\SheetMetalPunchTechnologyDocument.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="icons\SheetMetalTurretDocument.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="icons\StaircaseConstraintsRulesDocument.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="icons\StandardLeadsTableDocument.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="icons\StudioDocument.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="icons\TextureDocument.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="icons\ThreadingStandardDocument.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="icons\UnfoldingDocument.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="icons\UnfoldingRulesDocument.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="icons\UserParametersDocument.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="icons\UserPropertyDocument.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="icons\WireDocument.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="icons\WireMethodDocument.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="icons\WireTechnologyDocument.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="icons\WizardDocument.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="icons\WizardRulesDocument.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="icons\WoodDocument.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="icons\WoodMethodDocument.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="icons\WOPExportSettingsDocument.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="icons\WordPPDocument.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="icons\WorkspaceBackgroundDocument.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="icons\WorkspacesManagerDocument.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="icons\Folder.ico" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
