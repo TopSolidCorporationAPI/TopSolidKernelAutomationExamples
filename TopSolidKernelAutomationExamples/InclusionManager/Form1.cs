@@ -135,7 +135,7 @@ namespace InclusionManager
                 //getting codes from family document
                 List<string> codesList = TopSolidHost.Families.GetCodes(familyDocument);
                 Frame3D frameOrigo = new Frame3D(Point3D.P0, Direction3D.DX, Direction3D.DY, Direction3D.DZ);
-                ElementId frameOrigoPoint = ElementId.Empty;
+                ElementId frameOrigin = ElementId.Empty;
 
                 Frame3D frameBest = new Frame3D(Point3D.P0, Direction3D.DX, Direction3D.DY, Direction3D.DZ);
                 ElementId frameBestPoint = ElementId.Empty;
@@ -186,7 +186,7 @@ namespace InclusionManager
                         //previous enclosing box is used
                         if (j > 0)
                         {
-                            SmartFrame3D frameDestination = new SmartFrame3D(frameOrigoPoint, false);
+                            SmartFrame3D frameDestination = new SmartFrame3D(frameOrigin, false);
                             SmartFrame3D frameSource = new SmartFrame3D(frameBestPoint, false);
                             SmartReal offsetDistance = new SmartReal(UnitType.Length, 0);
                             SmartReal rotationAngle = new SmartReal(UnitType.Angle, 0);
@@ -217,10 +217,10 @@ namespace InclusionManager
                         }
 
                         //create new frame which will be used for next code
-                        Frame3D frameBestNew = new Frame3D(new Point3D(frameBest.Origin.X + (Xmax - Xmin)+0.005, frameBest.Origin.Y, frameBest.Origin.Z), Direction3D.DX, Direction3D.DY, Direction3D.DZ);
-                        frameOrigoPoint = TopSolidHost.Geometries3D.CreateFrame(currentDocument, frameBestNew);
+                        Frame3D newBestFrame = new Frame3D(new Point3D(frameBest.Origin.X + (Xmax - Xmin)+0.005, frameBest.Origin.Y, frameBest.Origin.Z), Direction3D.DX, Direction3D.DY, Direction3D.DZ);
+                        frameOrigin = TopSolidHost.Geometries3D.CreateFrame(currentDocument, newBestFrame);
 
-                        frameBest = frameBestNew;
+                        frameBest = newBestFrame;
 
                     }
                 }
@@ -230,8 +230,6 @@ namespace InclusionManager
             {
                 TopSolidHost.Application.EndModification(false, false);
             }
-
-
         }
 
 

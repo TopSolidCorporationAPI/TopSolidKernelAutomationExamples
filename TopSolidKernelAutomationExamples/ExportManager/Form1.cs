@@ -124,7 +124,7 @@ namespace ExportManager
             {
                 if (node.Checked)
                 {
-                    if (node.ImageKey != "folder" || node.ImageIndex == 1)
+                    if (node.ImageKey != "folder" && node.ImageIndex != 0)
                     {
                         if (node.Tag != null)
                         {

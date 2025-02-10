@@ -15,6 +15,7 @@ using System.Windows.Forms;
 
 //automation
 using TopSolid.Kernel.Automating;
+using TopSolidAutomationControls.Properties;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using static TopSolidAutomationControls.DocumentSelector;
 using TreeView = System.Windows.Forms.TreeView;
@@ -26,6 +27,8 @@ namespace TopSolidAutomationControls
     {
         private bool multipleCheck = false;
         private TreeNode _firstCheckedNode; // Stocke le premier nœud coché
+
+        public List<string> extensionList;
 
         [Browsable(true)]
         [Category("TopSolidAutomation")]
@@ -139,19 +142,21 @@ namespace TopSolidAutomationControls
         private void InitializeImageList()
         {
             // Création et configuration de l'ImageList
-            imageList1 = new ImageList();            
+            imageList1 = new ImageList();
+            imageList1.ImageSize = new Size(16, 16);
+            imageList1.ColorDepth = ColorDepth.Depth32Bit;
+
+            //création de la liste des extensions
+            extensionList = new List<string>();
 
             // Obtenir toutes les ressources à partir de la classe Properties.Resources
             var resManager = new ResourceManager(typeof(Properties.Resources));
 
             try
             {
-                imageList1.Images.Add("folder", Properties.Resources.folderNEW);
-                imageList1.Images.Add("file", Properties.Resources.fileNew);
+                imageList1.Images.Add("folder", Properties.Resources.Folder);
+                imageList1.Images.Add("file", Properties.Resources.Document);
                
-                //imageList1.Images.Add(".TopPrt", Properties.Resources.PartDocument);
-                //imageList1.Images.Add(".TopAsm", Properties.Resources.AssemblyDocument);
-                //imageList1.Images.Add(".TopFam", Properties.Resources.FamilyDocument);
 
                 foreach (var resource in typeof(Properties.Resources).GetProperties(BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic))
                 {
@@ -162,7 +167,9 @@ namespace TopSolidAutomationControls
 
                         // Ajouter l'icône à l'ImageList
                         Icon icon = (Icon)resource.GetValue(null, null);
-                        imageList1.Images.Add("."+resourceName,icon);
+                        imageList1.Images.Add(resourceName,icon);
+
+                        extensionList.Add(resourceName);
                     }                   
                 }
 
@@ -211,9 +218,13 @@ namespace TopSolidAutomationControls
 
                     if (showFile)
                     {
+                        string typeFullName = TopSolidHost.Documents.GetTypeFullName(TopSolidHost.Documents.GetDocument(objectId));
+                        int indexLastPoint = typeFullName.LastIndexOf('.');
+                        string documentTypeFromFile = typeFullName.Substring(indexLastPoint + 1);
                         TopSolidHost.Pdm.GetType(objectId, out string extensionPdmObject);
-                        string imageKey = extensionPdmObject==null? "file":extensionPdmObject.ToString();
-                        List<string> extensionList = new List<string> { ".TopPrt", ".TopAsm", ".TopFam" };
+                        string imageKey = extensionPdmObject==null? "file": documentTypeFromFile.ToString();
+
+                        //List<string> extensionList = new List<string> { "PartDocument", "AssemblyDocument", ".TopFam" };
 
                         TreeNode treeNode = new TreeNode(TopSolidHost.Pdm.GetName(objectId), 1, 1)
                         {
@@ -226,6 +237,8 @@ namespace TopSolidAutomationControls
                         this.Nodes.Add(treeNode);
                     }
                 }
+
+                SortNodes(this.Nodes);
             }
         }
 
@@ -249,23 +262,20 @@ namespace TopSolidAutomationControls
 
                 if (showFile)
                 {
+                    string typeFullName = TopSolidHost.Documents.GetTypeFullName(TopSolidHost.Documents.GetDocument(objectId));
+                    int indexLastPoint = typeFullName.LastIndexOf('.');
+                    string documentTypeFromFile = typeFullName.Substring(indexLastPoint + 1);
                     TopSolidHost.Pdm.GetType(objectId, out string extensionPdmObject);
-                    string imageKey = extensionPdmObject == null ? "file" : extensionPdmObject.ToString();
-                    List<string> extensionList = new List<string> { ".TopPrt", ".TopAsm", ".TopFam" };
+                    string imageKey = extensionPdmObject == null ? "file" : documentTypeFromFile.ToString();
+                    //List<string> extensionList = new List<string> { "PartDocument", ".TopAsm", ".TopFam" };
 
                     TreeNode treeNode = new TreeNode(TopSolidHost.Pdm.GetName(objectId), 1, 1)
                     {
                         ImageIndex = 1,
                         Tag = objectId,
                         SelectedImageKey = extensionList.Contains(imageKey) ? imageKey : "file",
-                        ImageKey = extensionList.Contains(imageKey) ? imageKey : "file"
+                        ImageKey = extensionList.Contains(imageKey) ? imageKey : "file",
                     };
-
-                    //treeNode.Tag = objectId;
-                    //treeNode.ImageKey = extensionList.Contains(imageKey) ? imageKey : "file";
-                    //treeNode.SelectedImageKey = extensionList.Contains(imageKey) ? imageKey : "file";
-                    //treeNode.ImageIndex = 1;
-
 
                     inNode.Nodes.Add(treeNode);
                 }
@@ -394,6 +404,45 @@ namespace TopSolidAutomationControls
                 }
             }
         }
+
+        // Method to sort nodes
+        public void SortNodes(TreeNodeCollection nodes)
+        {
+            // Convertir la collection en liste pour faciliter le tri
+            List<TreeNode> nodeList = new List<TreeNode>();
+            foreach (TreeNode node in nodes)
+            {
+                nodeList.Add(node);
+            }
+
+            // Custom comparison to sort nodes
+            nodeList.Sort((x, y) =>
+            {
+                bool xIsDirectory = x.ImageKey == "folder" || x.ImageIndex == 0;
+                bool yIsDirectory = y.ImageKey == "folder" || y.ImageIndex == 0;
+                
+                if (xIsDirectory && !yIsDirectory)
+                    return -1; 
+                else if (!xIsDirectory && yIsDirectory)
+                    return 1; 
+                else
+                    return string.Compare(x.Text, y.Text, StringComparison.OrdinalIgnoreCase); // Compare
+            });
+
+            // Apply order
+            nodes.Clear();
+            nodes.AddRange(nodeList.ToArray());
+
+            // Trier récursivement les enfants
+            foreach (TreeNode node in nodes)
+            {
+                if (node.Nodes.Count > 0)
+                {
+                    SortNodes(node.Nodes);
+                }
+            }
+        }
+
 
     }
 }

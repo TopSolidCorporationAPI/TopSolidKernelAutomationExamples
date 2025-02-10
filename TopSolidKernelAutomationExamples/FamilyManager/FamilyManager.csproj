@@ -72,11 +72,6 @@
       <HintPath>$(OutputPath)\TopSolid.Kernel.Automating.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="TopSolid.Kernel.DB">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>$(OutputPath)\TopSolid.Kernel.DB.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Form1.cs">
@@ -89,6 +84,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

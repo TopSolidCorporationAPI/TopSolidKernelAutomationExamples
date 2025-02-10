@@ -45,10 +45,12 @@
             this.rdbForSelection = new System.Windows.Forms.RadioButton();
             this.rdbForAll = new System.Windows.Forms.RadioButton();
             this.btSetFamilyGenericDocument = new System.Windows.Forms.Button();
+            this.picBoxPreview = new System.Windows.Forms.PictureBox();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picBoxPreview)).BeginInit();
             this.SuspendLayout();
             // 
             // btCreateExplicitFamily
@@ -192,22 +194,26 @@
             this.pdmTreeView1.SelectedImageIndex = 0;
             this.pdmTreeView1.Size = new System.Drawing.Size(319, 430);
             this.pdmTreeView1.TabIndex = 3;
+            this.pdmTreeView1.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.pdmTreeView1_AfterSelect);
             // 
             // tableLayoutPanel3
             // 
-            this.tableLayoutPanel3.ColumnCount = 2;
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel3.Controls.Add(this.rdbForSelection, 0, 0);
-            this.tableLayoutPanel3.Controls.Add(this.rdbForAll, 0, 1);
-            this.tableLayoutPanel3.Controls.Add(this.btSetFamilyGenericDocument, 1, 0);
+            this.tableLayoutPanel3.ColumnCount = 3;
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 32.96703F));
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 21.75824F));
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 45F));
+            this.tableLayoutPanel3.Controls.Add(this.rdbForSelection, 1, 1);
+            this.tableLayoutPanel3.Controls.Add(this.rdbForAll, 1, 2);
+            this.tableLayoutPanel3.Controls.Add(this.btSetFamilyGenericDocument, 2, 1);
+            this.tableLayoutPanel3.Controls.Add(this.picBoxPreview, 0, 1);
             this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel3.Location = new System.Drawing.Point(342, 228);
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
-            this.tableLayoutPanel3.RowCount = 3;
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel3.RowCount = 4;
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35F));
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 72F));
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 68F));
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 10F));
             this.tableLayoutPanel3.Size = new System.Drawing.Size(455, 219);
             this.tableLayoutPanel3.TabIndex = 4;
             // 
@@ -217,9 +223,9 @@
             this.rdbForSelection.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.rdbForSelection.Checked = true;
             this.rdbForSelection.Dock = System.Windows.Forms.DockStyle.Right;
-            this.rdbForSelection.Location = new System.Drawing.Point(137, 3);
+            this.rdbForSelection.Location = new System.Drawing.Point(159, 38);
             this.rdbForSelection.Name = "rdbForSelection";
-            this.rdbForSelection.Size = new System.Drawing.Size(87, 44);
+            this.rdbForSelection.Size = new System.Drawing.Size(87, 66);
             this.rdbForSelection.TabIndex = 0;
             this.rdbForSelection.TabStop = true;
             this.rdbForSelection.Text = "For Selection";
@@ -230,9 +236,9 @@
             this.rdbForAll.AutoSize = true;
             this.rdbForAll.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.rdbForAll.Dock = System.Windows.Forms.DockStyle.Right;
-            this.rdbForAll.Location = new System.Drawing.Point(170, 53);
+            this.rdbForAll.Location = new System.Drawing.Point(192, 110);
             this.rdbForAll.Name = "rdbForAll";
-            this.rdbForAll.Size = new System.Drawing.Size(54, 44);
+            this.rdbForAll.Size = new System.Drawing.Size(54, 62);
             this.rdbForAll.TabIndex = 0;
             this.rdbForAll.Text = "For All";
             this.rdbForAll.UseVisualStyleBackColor = true;
@@ -240,15 +246,25 @@
             // btSetFamilyGenericDocument
             // 
             this.btSetFamilyGenericDocument.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.btSetFamilyGenericDocument.Location = new System.Drawing.Point(247, 31);
+            this.btSetFamilyGenericDocument.Location = new System.Drawing.Point(269, 86);
             this.btSetFamilyGenericDocument.Margin = new System.Windows.Forms.Padding(20, 3, 20, 3);
             this.btSetFamilyGenericDocument.Name = "btSetFamilyGenericDocument";
             this.tableLayoutPanel3.SetRowSpan(this.btSetFamilyGenericDocument, 2);
-            this.btSetFamilyGenericDocument.Size = new System.Drawing.Size(188, 38);
+            this.btSetFamilyGenericDocument.Size = new System.Drawing.Size(166, 38);
             this.btSetFamilyGenericDocument.TabIndex = 1;
             this.btSetFamilyGenericDocument.Text = "Set Generic Document";
             this.btSetFamilyGenericDocument.UseVisualStyleBackColor = true;
             this.btSetFamilyGenericDocument.Click += new System.EventHandler(this.btSetFamilyGenericDocument_Click);
+            // 
+            // picBoxPreview
+            // 
+            this.picBoxPreview.Location = new System.Drawing.Point(3, 38);
+            this.picBoxPreview.Name = "picBoxPreview";
+            this.tableLayoutPanel3.SetRowSpan(this.picBoxPreview, 2);
+            this.picBoxPreview.Size = new System.Drawing.Size(144, 134);
+            this.picBoxPreview.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.picBoxPreview.TabIndex = 2;
+            this.picBoxPreview.TabStop = false;
             // 
             // Form1
             // 
@@ -259,6 +275,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
             this.Text = "Family Manager";
+            this.TopMost = true;
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel2.ResumeLayout(false);
             this.tableLayoutPanel2.PerformLayout();
@@ -266,6 +283,7 @@
             this.flowLayoutPanel1.PerformLayout();
             this.tableLayoutPanel3.ResumeLayout(false);
             this.tableLayoutPanel3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picBoxPreview)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -286,6 +304,7 @@
         private System.Windows.Forms.RadioButton rdbForSelection;
         private System.Windows.Forms.RadioButton rdbForAll;
         private System.Windows.Forms.Button btSetFamilyGenericDocument;
+        private System.Windows.Forms.PictureBox picBoxPreview;
     }
 }
 
