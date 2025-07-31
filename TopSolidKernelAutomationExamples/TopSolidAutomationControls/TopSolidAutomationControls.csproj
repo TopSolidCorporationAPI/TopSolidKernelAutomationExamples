@@ -388,5 +388,8 @@
   <ItemGroup>
     <EmbeddedResource Include="icons\Folder.ico" />
   </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="icons\DraftingDocument.ico" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

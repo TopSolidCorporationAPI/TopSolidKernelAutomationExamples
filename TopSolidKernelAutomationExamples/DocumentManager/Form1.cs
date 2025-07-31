@@ -113,7 +113,6 @@ namespace DocumentManager
             {
                 this.cmbProjectsList.Items.Add(new ProjectData(item.Name, item.Id));
             }
-
         }
 
         /// <summary>
@@ -169,7 +168,8 @@ namespace DocumentManager
         {
             TreeNode rootNode;
             rootNode = new TreeNode(TopSolidHost.Pdm.GetName(currentLib));
-            rootNode.Tag = currentLib;
+            //rootNode.Tag = currentLib;
+            rootNode.Tag = new PdmObjectData(false, currentLib);
 
             TopSolidHost.Pdm.GetConstituents(currentLib, out List<PdmObjectId> outFolderIds, out List<PdmObjectId> outDocumentIds);
 
@@ -178,7 +178,8 @@ namespace DocumentManager
             {
                 TreeNode treeNode = new TreeNode(TopSolidHost.Pdm.GetName(objectId), 0, 0);
                 treeNode.ImageIndex = 0;
-                treeNode.Tag = objectId;
+                //treeNode.Tag = objectId;
+                treeNode.Tag = new PdmObjectData(false, objectId); ;
                 treeNode.ImageKey = "folder";
                 this.treeViewContent.Nodes.Add(treeNode);
                 GetAllSubDocuments(objectId, ref treeNode);
@@ -187,9 +188,34 @@ namespace DocumentManager
             foreach (PdmObjectId objectId in outDocumentIds)
             {
                 TreeNode treeNode = new TreeNode(TopSolidHost.Pdm.GetName(objectId), 1, 1);
-                treeNode.Tag = objectId;
+                //treeNode.Tag = objectId;
+                treeNode.Tag = new PdmObjectData(false, objectId); ;
                 treeNode.ImageIndex = 1;
                 treeNode.ImageKey = "file";
+
+                //check if document is explicit family
+                //if so, display different code documents in the treeview
+                DocumentId currentDocument = TopSolidHost.Documents.GetDocument(objectId);
+                if (currentDocument != DocumentId.Empty)
+                {
+                    if (TopSolidHost.Families.IsFamily(currentDocument) && TopSolidHost.Families.IsExplicit(currentDocument))
+                    {
+                        TopSolidHost.Families.GetExplicitInstances(currentDocument, out _, out List<PdmObjectId> instancesForFamily);
+                        foreach (PdmObjectId familyInstance in instancesForFamily)
+                        {
+                            TreeNode treeNodeInstance = new TreeNode(TopSolidHost.Pdm.GetName(familyInstance), 1, 1);
+                            //treeNodeInstance.Tag = familyInstance;
+                            treeNodeInstance.Tag = new PdmObjectData(true, familyInstance);
+                            treeNodeInstance.BackColor = System.Drawing.Color.LightBlue;
+                            treeNodeInstance.ImageKey = "file";
+                            treeNodeInstance.ImageIndex = 1;
+
+                            treeNode.Nodes.Add(treeNodeInstance);
+                        }
+                    }
+                }
+
+
                 this.treeViewContent.Nodes.Add(treeNode);
             }
 
@@ -212,9 +238,33 @@ namespace DocumentManager
             foreach (PdmObjectId objectId in outDocumentList)
             {
                 TreeNode treeNode = new TreeNode(TopSolidHost.Pdm.GetName(objectId), 1, 1);
-                treeNode.Tag = objectId;
+                // treeNode.Tag = objectId;
+                treeNode.Tag = new PdmObjectData(false, objectId); 
                 treeNode.ImageKey = "file";
                 treeNode.ImageIndex = 1;
+
+                //check if document is explicit family
+                //if so, display different code documents in the treeview
+                DocumentId currentDocument = TopSolidHost.Documents.GetDocument(objectId);
+                if (currentDocument != DocumentId.Empty)
+                {
+                    if (TopSolidHost.Families.IsFamily(currentDocument) && TopSolidHost.Families.IsExplicit(currentDocument))
+                    {
+                        TopSolidHost.Families.GetExplicitInstances(currentDocument, out List<string> outCodes, out List<PdmObjectId> instancesForFamily);
+                        foreach (PdmObjectId familyInstance in instancesForFamily)
+                        {
+                            TreeNode treeNodeInstance = new TreeNode(TopSolidHost.Pdm.GetName(familyInstance), 1, 1);
+                            //treeNodeInstance.Tag = familyInstance;
+                            treeNodeInstance.Tag = new PdmObjectData(true, familyInstance);
+                            treeNodeInstance.BackColor = System.Drawing.Color.LightBlue;
+                            treeNodeInstance.ImageKey = "file";
+                            treeNodeInstance.ImageIndex = 1;
+
+                            treeNode.Nodes.Add(treeNodeInstance);
+                        }
+                    }
+                }
+
                 inNode.Nodes.Add(treeNode);
             }
 
@@ -222,7 +272,8 @@ namespace DocumentManager
             foreach (PdmObjectId objectId in outFoldersList)
             {
                 TreeNode treeNode = new TreeNode(TopSolidHost.Pdm.GetName(objectId), 0, 0);
-                treeNode.Tag = objectId;
+                // treeNode.Tag = objectId;
+                treeNode.Tag = new PdmObjectData(false, objectId);
                 treeNode.ImageKey = "folder";
                 treeNode.ImageIndex = 0;
                 inNode.Nodes.Add(treeNode);
@@ -252,11 +303,11 @@ namespace DocumentManager
             {
                 if (node.Checked)
                 {
-                    if (node.ImageKey == "file" || node.ImageIndex == 1)
+                    if (node.ImageKey != "folder" && node.ImageIndex != 0)
                     {
                         if (node.Tag != null)
                         {
-                            PdmObjectId pdmObject = (PdmObjectId)node.Tag;
+                            PdmObjectId pdmObject = (PdmObjectId)((node.Tag as PdmObjectData).Id);
                             if (pdmObject.IsEmpty) continue;
 
                             DocumentId documentId = TopSolidHost.Documents.GetDocument(pdmObject);
@@ -295,11 +346,12 @@ namespace DocumentManager
             {
                 if (node.Checked)
                 {
-                    if (node.ImageKey == "file" || node.ImageIndex == 1)
+                    if (node.ImageKey != "folder" && node.ImageIndex != 0)
                     {
                         if (node.Tag != null)
                         {
-                            PdmObjectId pdmObject = (PdmObjectId)node.Tag;
+                            //PdmObjectId pdmObject = (PdmObjectId)node.Tag;
+                            PdmObjectId pdmObject = (PdmObjectId)((node.Tag as PdmObjectData).Id);
                             if (pdmObject.IsEmpty) continue;
 
                             checkedObjects.Add(pdmObject);
@@ -319,11 +371,12 @@ namespace DocumentManager
             {
                 if (node.Checked)
                 {
-                    if (node.ImageKey == "file" || node.ImageIndex == 1)
+                    if (node.ImageKey != "folder" && node.ImageIndex != 0)
                     {
                         if (node.Tag != null)
                         {
-                            PdmObjectId pdmObject = (PdmObjectId)node.Tag;
+                            //PdmObjectId pdmObject = (PdmObjectId)node.Tag;
+                            PdmObjectId pdmObject = (PdmObjectId)((node.Tag as PdmObjectData).Id);
                             if (pdmObject.IsEmpty) continue;
 
                             objectsToRemove.Add(pdmObject);
@@ -417,7 +470,8 @@ namespace DocumentManager
             {
                 this.picBoxPreview.Image = null;
 
-                PdmObjectId pdmObject = (PdmObjectId)e.Node.Tag;
+                //PdmObjectId pdmObject = (PdmObjectId)e.Node.Tag;
+                PdmObjectId pdmObject = (PdmObjectId)((e.Node.Tag as PdmObjectData).Id);
                 if (pdmObject.IsEmpty) return;
 
                 DocumentId docToModify = TopSolidHost.Documents.GetDocument(pdmObject);
@@ -462,11 +516,14 @@ namespace DocumentManager
 
             if (documentsToSave.Count > 0)
             {
-                //refresh UI
+                List<PdmObjectId> docstosaveAsPdmObject= new List<PdmObjectId>();
+                
                 foreach (DocumentId docToSave in documentsToSave)
                 {
-                    TopSolidHost.Documents.Save(docToSave);
+                    docstosaveAsPdmObject.Add(TopSolidHost.Documents.GetPdmObject(docToSave));
+                    //TopSolidHost.Documents.Save(docToSave);
                 }
+                TopSolidHost.Pdm.SaveSeveral(docstosaveAsPdmObject,true);
             }
         }
 
@@ -540,27 +597,32 @@ namespace DocumentManager
         #region parameter methods
         private void btModify_Click(object sender, EventArgs e)
         {
-            List<PdmObjectId> docsToModify = new List<PdmObjectId>();
+            List<PdmObjectData> docsToModify = new List<PdmObjectData>();
             List<TreeNode> checkedNodes = new List<TreeNode>();
             GetCheckedFilesNodes(treeViewContent.Nodes, ref checkedNodes);
             foreach (var item in checkedNodes.Select(x => x.Tag).ToList())
             {
                 if (item == null) continue;
-                docsToModify.Add((PdmObjectId)item);
+                docsToModify.Add(item as PdmObjectData);
             }
 
             if (listViewParams.SelectedItems.Count == 0) MessageBox.Show("You need to select a parameter from the list to modify it.");
 
             if (docsToModify.Count == 0) MessageBox.Show("You need to select a document from the list.");
 
-            foreach (PdmObjectId docToModify in docsToModify)
+            foreach (PdmObjectData pdmObjectToModify in docsToModify)
             {
+                PdmObjectId docToModify = pdmObjectToModify.Id;
+                if (docToModify.IsEmpty) continue;
+
                 DocumentId docIdToModify = TopSolidHost.Documents.GetDocument(docToModify);
+                if (docIdToModify.IsEmpty) continue;
 
                 List<ElementId> parameters = TopSolidHost.Parameters.GetParameters(docIdToModify);
                 var findParameter = (from ElementId eltId in parameters
                                      where TopSolidHost.Elements.GetFriendlyName(eltId) == listViewParams.SelectedItems[0].Text
                                      select eltId).ToList();
+
                 if (findParameter.Count == 1)
                 {
                     ParameterType paramType = TopSolidHost.Parameters.GetParameterType(findParameter[0]);
@@ -574,19 +636,19 @@ namespace DocumentManager
                             case ParameterType.Real:
                                 if (HelperClass.GetDoubleValue(this.txtParameterValue.Text, out double doubleValue) && currentValue != null && currentValue != doubleValue.ToString())
                                 {
-                                    ModifyParameter<double>(docIdToModify, listViewParams.SelectedItems[0].Text, doubleValue);
+                                    ModifyParameter<double>(docIdToModify, listViewParams.SelectedItems[0].Text, doubleValue, pdmObjectToModify.IsFamilyInstance);
                                 }
                                 break;
                             case ParameterType.Integer:
                                 if (HelperClass.GetIntValue(this.txtParameterValue.Text, out int intValue) && currentValue != null && currentValue != intValue.ToString())
                                 {
-                                    ModifyParameter<int>(docIdToModify, listViewParams.SelectedItems[0].Text, intValue);
+                                    ModifyParameter<int>(docIdToModify, listViewParams.SelectedItems[0].Text, intValue, pdmObjectToModify.IsFamilyInstance);
                                 }
                                 break;
                             case ParameterType.Text:
                                 if (HelperClass.GetTextValue(this.txtParameterValue.Text, out string textValue) && currentValue != textValue)
                                 {
-                                    ModifyParameter<string>(docIdToModify, listViewParams.SelectedItems[0].Text, textValue);
+                                    ModifyParameter<string>(docIdToModify, listViewParams.SelectedItems[0].Text, textValue, pdmObjectToModify.IsFamilyInstance);
                                 }
                                 break;
                             case ParameterType.Tolerance:
@@ -613,7 +675,7 @@ namespace DocumentManager
                                 int currentValue = TopSolidHost.Parameters.GetEnumerationValue(findParameter[0]);
                                 if (currentValue != listEnumValues.SelectedIndex + 1)
                                 {
-                                    ModifyParameterEnumeration(docIdToModify, listViewParams.SelectedItems[0].Text,false);                                    
+                                    ModifyParameterEnumeration(docIdToModify, listViewParams.SelectedItems[0].Text,false, pdmObjectToModify.IsFamilyInstance);                                    
                                 }
                             }
                         }
@@ -624,7 +686,7 @@ namespace DocumentManager
                                 int currentValue = TopSolidHost.Parameters.GetUserEnumerationValue(findParameter[0]);
                                 if (currentValue != listEnumValues.SelectedIndex + 1)
                                 {
-                                    ModifyParameterEnumeration(docIdToModify, listViewParams.SelectedItems[0].Text, true);
+                                    ModifyParameterEnumeration(docIdToModify, listViewParams.SelectedItems[0].Text, true, pdmObjectToModify.IsFamilyInstance);
                                 }
                             }
                         }
@@ -634,8 +696,13 @@ namespace DocumentManager
 
         }
 
-        private void ModifyParameterEnumeration(DocumentId docIdToModify, string parameterName,bool isUser)
+        private void ModifyParameterEnumeration(DocumentId docIdToModify, string parameterName,bool isUser, bool isFamilyInstance)
         {
+            if (isFamilyInstance)
+            {
+                TopSolidHost.Documents.Open(ref docIdToModify);
+            }
+
             TopSolidHost.Application.StartModification("Modify Parameter Enumeration", false);
             try
             {
@@ -655,17 +722,26 @@ namespace DocumentManager
                 }
                 TopSolidHost.Application.EndModification(true, true);
 
-                //Save eventually
-                //TopSolidHost.Documents.Save(docIdToModify);
             }
             catch
             {
                 TopSolidHost.Application.EndModification(false, false);
             }
+
+            if (isFamilyInstance)
+            {
+                TopSolidHost.Pdm.Save(TopSolidHost.Documents.GetPdmObject(docIdToModify), true);
+                TopSolidHost.Documents.Close(docIdToModify, false, false);
+            }
         }
 
-        private static void ModifyParameter<T>(DocumentId docIdToModify,string parameterName, object value)
+        private static void ModifyParameter<T>(DocumentId docIdToModify,string parameterName, object value,bool isFamilyInstance)
         {
+            if (isFamilyInstance)
+            {
+                TopSolidHost.Documents.Open(ref docIdToModify);
+            }
+
             TopSolidHost.Application.StartModification("Modify Parameter", false);
             try
             {
@@ -690,32 +766,36 @@ namespace DocumentManager
 
                 TopSolidHost.Application.EndModification(true, true);
 
-                //Save eventually
-                //TopSolidHost.Documents.Save(docIdToModify);
             }
             catch
             {
                 TopSolidHost.Application.EndModification(false, false);
             }
-         }
+
+            if (isFamilyInstance)
+            {
+                TopSolidHost.Pdm.Save(TopSolidHost.Documents.GetPdmObject(docIdToModify),true);
+                TopSolidHost.Documents.Close(docIdToModify,false,false);
+            }
+        }
 
         private void btClear_Click(object sender, EventArgs e)
         {
-            List<PdmObjectId> docsToModify = new List<PdmObjectId>();
+            List<PdmObjectData> docsToModify = new List<PdmObjectData>();
             List<TreeNode> checkedNodes = new List<TreeNode>();
             GetCheckedFilesNodes(treeViewContent.Nodes, ref checkedNodes);
             foreach (var item in checkedNodes.Select(x => x.Tag).ToList())
             {
                 if (item == null) continue;
-                docsToModify.Add((PdmObjectId)item);
+                docsToModify.Add(item as PdmObjectData);
             }
 
             if (listViewParams.SelectedItems.Count == 0) return;
 
 
-            foreach (PdmObjectId docToModify in docsToModify)
+            foreach (PdmObjectData pdmObjectDataToModify in docsToModify)
             {
-                DocumentId docIdToModify = TopSolidHost.Documents.GetDocument(docToModify);
+                DocumentId docIdToModify = TopSolidHost.Documents.GetDocument(pdmObjectDataToModify.Id);
 
                 List<ElementId> parameters = TopSolidHost.Parameters.GetParameters(docIdToModify);
                 var findParameter = (from ElementId eltId in parameters
@@ -731,16 +811,24 @@ namespace DocumentManager
 
                         if (currentValue != null && currentValue.Length > 0)
                         {
-                            ClearValue(docIdToModify, listViewParams.SelectedItems[0].Text);
+                            if (pdmObjectDataToModify.IsFamilyInstance)
+                            {
+                                TopSolidHost.Documents.Open(ref docIdToModify);
+                            }
+                            ClearValue(docIdToModify, listViewParams.SelectedItems[0].Text, pdmObjectDataToModify.IsFamilyInstance);                           
                         }
                     }
                 }
             }
-
         }
 
-        private static DocumentId ClearValue(DocumentId docIdToModify, string parameterName)
+        private static DocumentId ClearValue(DocumentId docIdToModify, string parameterName,bool isFamilyInstance)
         {
+            if (isFamilyInstance)
+            {
+                TopSolidHost.Documents.Open(ref docIdToModify);
+            }
+
             TopSolidHost.Application.StartModification("Modify Parameter", false);
             try
             {
@@ -756,12 +844,16 @@ namespace DocumentManager
 
                 TopSolidHost.Application.EndModification(true, true);
 
-                //Save eventually
-                //TopSolidHost.Documents.Save(docIdToModify);
             }
             catch
             {
                 TopSolidHost.Application.EndModification(false, false);
+            }
+
+            if (isFamilyInstance)
+            {
+                TopSolidHost.Pdm.Save(TopSolidHost.Documents.GetPdmObject(docIdToModify), true);
+                TopSolidHost.Documents.Close(docIdToModify, false, false);
             }
 
             return docIdToModify;
@@ -769,7 +861,8 @@ namespace DocumentManager
 
         private void UpdateParamsList(TreeViewEventArgs e)
         {
-            PdmObjectId pdmObject = (PdmObjectId)e.Node.Tag;
+            //PdmObjectId pdmObject = (PdmObjectId)e.Node.Tag;
+            PdmObjectId pdmObject = (PdmObjectId)((e.Node.Tag as PdmObjectData).Id);
             if (pdmObject.IsEmpty) return;
 
             DocumentId docId = TopSolidHost.Documents.GetDocument(pdmObject);
@@ -809,7 +902,8 @@ namespace DocumentManager
 
         private void UpdateVirtualMode(TreeViewEventArgs e)
         {
-            PdmObjectId pdmObject = (PdmObjectId)e.Node.Tag;
+            //PdmObjectId pdmObject = (PdmObjectId)e.Node.Tag;
+            PdmObjectId pdmObject = (PdmObjectId)((e.Node.Tag as PdmObjectData).Id);
             if (pdmObject.IsEmpty) return;
 
             DocumentId docId = TopSolidHost.Documents.GetDocument(pdmObject);
@@ -836,7 +930,8 @@ namespace DocumentManager
                 PdmObjectId selectedDocId = PdmObjectId.Empty;
                 if (treeViewContent.SelectedNode != null)
                 {
-                    selectedDocId = (PdmObjectId)treeViewContent.SelectedNode.Tag;
+                    //selectedDocId = (PdmObjectId)treeViewContent.SelectedNode.Tag;
+                    selectedDocId = (PdmObjectId)((treeViewContent.SelectedNode.Tag as PdmObjectData).Id);
                 }
                 else
                 {
@@ -922,7 +1017,8 @@ namespace DocumentManager
             foreach (var item in checkedNodes.Select(x => x.Tag).ToList())
             {
                 if (item == null) continue;
-                docsToModify.Add((PdmObjectId)item);
+                //docsToModify.Add((PdmObjectId)item);
+                docsToModify.Add((PdmObjectId)(item as PdmObjectData).Id);
             }
 
             foreach (PdmObjectId docToModify in docsToModify)

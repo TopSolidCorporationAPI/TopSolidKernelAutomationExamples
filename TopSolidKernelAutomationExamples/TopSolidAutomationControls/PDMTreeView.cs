@@ -218,13 +218,15 @@ namespace TopSolidAutomationControls
 
                     if (showFile)
                     {
-                        string typeFullName = TopSolidHost.Documents.GetTypeFullName(TopSolidHost.Documents.GetDocument(objectId));
-                        int indexLastPoint = typeFullName.LastIndexOf('.');
-                        string documentTypeFromFile = typeFullName.Substring(indexLastPoint + 1);
+                        string documentTypeFromFile = "file";
+                        if (!TopSolidHost.Pdm.IsExternal(objectId))
+                        {
+                            string typeFullName = TopSolidHost.Documents.GetTypeFullName(TopSolidHost.Documents.GetDocument(objectId));
+                            int indexLastPoint = typeFullName.LastIndexOf('.');
+                            documentTypeFromFile = typeFullName.Substring(indexLastPoint + 1);
+                        }
                         TopSolidHost.Pdm.GetType(objectId, out string extensionPdmObject);
                         string imageKey = extensionPdmObject==null? "file": documentTypeFromFile.ToString();
-
-                        //List<string> extensionList = new List<string> { "PartDocument", "AssemblyDocument", ".TopFam" };
 
                         TreeNode treeNode = new TreeNode(TopSolidHost.Pdm.GetName(objectId), 1, 1)
                         {
@@ -252,7 +254,7 @@ namespace TopSolidAutomationControls
 
             //Get all documents of the first level
             foreach (PdmObjectId objectId in outDocumentList)
-            {
+            {                 
                 bool showFile = true;
                 TopSolidHost.Pdm.GetType(objectId, out string extension);
                 if (documentTypes.Count() > 0 && !documentTypes.Contains(extension))
@@ -262,9 +264,13 @@ namespace TopSolidAutomationControls
 
                 if (showFile)
                 {
-                    string typeFullName = TopSolidHost.Documents.GetTypeFullName(TopSolidHost.Documents.GetDocument(objectId));
-                    int indexLastPoint = typeFullName.LastIndexOf('.');
-                    string documentTypeFromFile = typeFullName.Substring(indexLastPoint + 1);
+                    string documentTypeFromFile = "file";
+                    if (!TopSolidHost.Pdm.IsExternal(objectId))
+                    {
+                        string typeFullName = TopSolidHost.Documents.GetTypeFullName(TopSolidHost.Documents.GetDocument(objectId));
+                        int indexLastPoint = typeFullName.LastIndexOf('.');
+                        documentTypeFromFile = typeFullName.Substring(indexLastPoint + 1);                        
+                    }
                     TopSolidHost.Pdm.GetType(objectId, out string extensionPdmObject);
                     string imageKey = extensionPdmObject == null ? "file" : documentTypeFromFile.ToString();
                     //List<string> extensionList = new List<string> { "PartDocument", ".TopAsm", ".TopFam" };

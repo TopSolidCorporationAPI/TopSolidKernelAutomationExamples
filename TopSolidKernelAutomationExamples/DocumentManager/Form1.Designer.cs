@@ -83,9 +83,9 @@ namespace DocumentManager
             // picBoxPreview
             // 
             this.picBoxPreview.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.picBoxPreview.Location = new System.Drawing.Point(23, 303);
+            this.picBoxPreview.Location = new System.Drawing.Point(13, 303);
             this.picBoxPreview.Name = "picBoxPreview";
-            this.picBoxPreview.Size = new System.Drawing.Size(179, 199);
+            this.picBoxPreview.Size = new System.Drawing.Size(227, 199);
             this.picBoxPreview.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.picBoxPreview.TabIndex = 0;
             this.picBoxPreview.TabStop = false;
@@ -106,9 +106,9 @@ namespace DocumentManager
             // tableLayoutPanel4
             // 
             this.tableLayoutPanel4.ColumnCount = 3;
-            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 21.12112F));
-            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30.63063F));
-            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 48.24825F));
+            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 24.92492F));
+            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 29.42943F));
+            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 45.64565F));
             this.tableLayoutPanel4.Controls.Add(this.tableLayoutPanel2, 0, 0);
             this.tableLayoutPanel4.Controls.Add(this.tableLayoutPanel5, 1, 0);
             this.tableLayoutPanel4.Controls.Add(this.tabDocDetails, 2, 0);
@@ -123,7 +123,7 @@ namespace DocumentManager
             // tableLayoutPanel2
             // 
             this.tableLayoutPanel2.ColumnCount = 2;
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 10F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel2.Controls.Add(this.picBoxPreview, 1, 6);
             this.tableLayoutPanel2.Controls.Add(this.rdbWorkingProjects, 1, 0);
@@ -142,7 +142,7 @@ namespace DocumentManager
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 40F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(205, 505);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(243, 505);
             this.tableLayoutPanel2.TabIndex = 0;
             // 
             // rdbWorkingProjects
@@ -151,7 +151,7 @@ namespace DocumentManager
             | System.Windows.Forms.AnchorStyles.Left)));
             this.rdbWorkingProjects.AutoSize = true;
             this.rdbWorkingProjects.Checked = true;
-            this.rdbWorkingProjects.Location = new System.Drawing.Point(23, 3);
+            this.rdbWorkingProjects.Location = new System.Drawing.Point(13, 3);
             this.rdbWorkingProjects.Name = "rdbWorkingProjects";
             this.rdbWorkingProjects.Size = new System.Drawing.Size(106, 44);
             this.rdbWorkingProjects.TabIndex = 0;
@@ -165,7 +165,7 @@ namespace DocumentManager
             this.rdbLibrairies.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
             this.rdbLibrairies.AutoSize = true;
-            this.rdbLibrairies.Location = new System.Drawing.Point(23, 53);
+            this.rdbLibrairies.Location = new System.Drawing.Point(13, 53);
             this.rdbLibrairies.Name = "rdbLibrairies";
             this.rdbLibrairies.Size = new System.Drawing.Size(66, 44);
             this.rdbLibrairies.TabIndex = 0;
@@ -177,7 +177,7 @@ namespace DocumentManager
             // 
             this.rdbImportPackage.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.rdbImportPackage.AutoSize = true;
-            this.rdbImportPackage.Location = new System.Drawing.Point(23, 120);
+            this.rdbImportPackage.Location = new System.Drawing.Point(13, 120);
             this.rdbImportPackage.Name = "rdbImportPackage";
             this.rdbImportPackage.Size = new System.Drawing.Size(112, 17);
             this.rdbImportPackage.TabIndex = 0;
@@ -195,21 +195,21 @@ namespace DocumentManager
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 26.25698F));
             this.tableLayoutPanel3.Controls.Add(this.btBrowse, 1, 0);
             this.tableLayoutPanel3.Controls.Add(this.txtPackagePath, 0, 0);
-            this.tableLayoutPanel3.Location = new System.Drawing.Point(23, 143);
+            this.tableLayoutPanel3.Location = new System.Drawing.Point(13, 143);
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
             this.tableLayoutPanel3.RowCount = 1;
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 54F));
-            this.tableLayoutPanel3.Size = new System.Drawing.Size(179, 54);
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(227, 54);
             this.tableLayoutPanel3.TabIndex = 2;
             // 
             // btBrowse
             // 
             this.btBrowse.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btBrowse.Image = global::DocumentManager.Properties.Resources.Import;
-            this.btBrowse.Location = new System.Drawing.Point(135, 3);
+            this.btBrowse.Location = new System.Drawing.Point(170, 3);
             this.btBrowse.Name = "btBrowse";
-            this.btBrowse.Size = new System.Drawing.Size(41, 48);
+            this.btBrowse.Size = new System.Drawing.Size(54, 48);
             this.btBrowse.TabIndex = 0;
             this.btBrowse.UseVisualStyleBackColor = true;
             this.btBrowse.Click += new System.EventHandler(this.btBrowse_Click);
@@ -220,18 +220,17 @@ namespace DocumentManager
             this.txtPackagePath.Enabled = false;
             this.txtPackagePath.Location = new System.Drawing.Point(3, 17);
             this.txtPackagePath.Name = "txtPackagePath";
-            this.txtPackagePath.Size = new System.Drawing.Size(126, 20);
+            this.txtPackagePath.Size = new System.Drawing.Size(161, 20);
             this.txtPackagePath.TabIndex = 1;
             // 
             // cmbProjectsList
             // 
-            this.cmbProjectsList.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.cmbProjectsList.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.cmbProjectsList.DisplayMember = "Name";
             this.cmbProjectsList.FormattingEnabled = true;
-            this.cmbProjectsList.Location = new System.Drawing.Point(43, 214);
-            this.cmbProjectsList.Margin = new System.Windows.Forms.Padding(10, 3, 10, 3);
+            this.cmbProjectsList.Location = new System.Drawing.Point(13, 214);
             this.cmbProjectsList.Name = "cmbProjectsList";
-            this.cmbProjectsList.Size = new System.Drawing.Size(138, 21);
+            this.cmbProjectsList.Size = new System.Drawing.Size(227, 21);
             this.cmbProjectsList.TabIndex = 1;
             this.cmbProjectsList.SelectedIndexChanged += new System.EventHandler(this.cmbProjectsList_SelectedIndexChanged);
             // 
@@ -243,12 +242,12 @@ namespace DocumentManager
             this.tableLayoutPanel5.Controls.Add(this.tableLayoutPanel8, 0, 1);
             this.tableLayoutPanel5.Controls.Add(this.treeViewContent, 0, 0);
             this.tableLayoutPanel5.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel5.Location = new System.Drawing.Point(214, 3);
+            this.tableLayoutPanel5.Location = new System.Drawing.Point(252, 3);
             this.tableLayoutPanel5.Name = "tableLayoutPanel5";
             this.tableLayoutPanel5.RowCount = 2;
             this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 78.24859F));
             this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 21.75141F));
-            this.tableLayoutPanel5.Size = new System.Drawing.Size(300, 511);
+            this.tableLayoutPanel5.Size = new System.Drawing.Size(288, 511);
             this.tableLayoutPanel5.TabIndex = 0;
             // 
             // tableLayoutPanel8
@@ -269,7 +268,7 @@ namespace DocumentManager
             this.tableLayoutPanel8.RowCount = 2;
             this.tableLayoutPanel8.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel8.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel8.Size = new System.Drawing.Size(294, 106);
+            this.tableLayoutPanel8.Size = new System.Drawing.Size(282, 106);
             this.tableLayoutPanel8.TabIndex = 1;
             // 
             // btOpen
@@ -278,7 +277,7 @@ namespace DocumentManager
             this.btOpen.Image = global::DocumentManager.Properties.Resources.OpenDocumentCommand;
             this.btOpen.Location = new System.Drawing.Point(3, 3);
             this.btOpen.Name = "btOpen";
-            this.btOpen.Size = new System.Drawing.Size(91, 47);
+            this.btOpen.Size = new System.Drawing.Size(87, 47);
             this.btOpen.TabIndex = 0;
             this.btOpen.UseVisualStyleBackColor = true;
             this.btOpen.Click += new System.EventHandler(this.btOpen_Click);
@@ -287,9 +286,9 @@ namespace DocumentManager
             // 
             this.btSave.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btSave.Image = global::DocumentManager.Properties.Resources.SaveCommand;
-            this.btSave.Location = new System.Drawing.Point(100, 3);
+            this.btSave.Location = new System.Drawing.Point(96, 3);
             this.btSave.Name = "btSave";
-            this.btSave.Size = new System.Drawing.Size(92, 47);
+            this.btSave.Size = new System.Drawing.Size(88, 47);
             this.btSave.TabIndex = 0;
             this.btSave.UseVisualStyleBackColor = true;
             this.btSave.Click += new System.EventHandler(this.btSave_Click);
@@ -300,7 +299,7 @@ namespace DocumentManager
             this.btCheckIn.Image = global::DocumentManager.Properties.Resources.CheckInCommand;
             this.btCheckIn.Location = new System.Drawing.Point(3, 56);
             this.btCheckIn.Name = "btCheckIn";
-            this.btCheckIn.Size = new System.Drawing.Size(91, 47);
+            this.btCheckIn.Size = new System.Drawing.Size(87, 47);
             this.btCheckIn.TabIndex = 0;
             this.btCheckIn.UseVisualStyleBackColor = true;
             this.btCheckIn.Click += new System.EventHandler(this.btCheckIn_Click);
@@ -309,9 +308,9 @@ namespace DocumentManager
             // 
             this.btCheckOut.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btCheckOut.Image = global::DocumentManager.Properties.Resources.CheckOutCommand;
-            this.btCheckOut.Location = new System.Drawing.Point(100, 56);
+            this.btCheckOut.Location = new System.Drawing.Point(96, 56);
             this.btCheckOut.Name = "btCheckOut";
-            this.btCheckOut.Size = new System.Drawing.Size(92, 47);
+            this.btCheckOut.Size = new System.Drawing.Size(88, 47);
             this.btCheckOut.TabIndex = 0;
             this.btCheckOut.UseVisualStyleBackColor = true;
             this.btCheckOut.Click += new System.EventHandler(this.btCheckOut_Click);
@@ -320,9 +319,9 @@ namespace DocumentManager
             // 
             this.btDelete.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btDelete.Image = global::DocumentManager.Properties.Resources.DeleteCommand;
-            this.btDelete.Location = new System.Drawing.Point(198, 3);
+            this.btDelete.Location = new System.Drawing.Point(190, 3);
             this.btDelete.Name = "btDelete";
-            this.btDelete.Size = new System.Drawing.Size(93, 47);
+            this.btDelete.Size = new System.Drawing.Size(89, 47);
             this.btDelete.TabIndex = 0;
             this.btDelete.UseVisualStyleBackColor = true;
             this.btDelete.Click += new System.EventHandler(this.btDelete_Click);
@@ -331,9 +330,9 @@ namespace DocumentManager
             // 
             this.btUndo.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btUndo.Image = global::DocumentManager.Properties.Resources.UndoCheckOutCommand;
-            this.btUndo.Location = new System.Drawing.Point(198, 56);
+            this.btUndo.Location = new System.Drawing.Point(190, 56);
             this.btUndo.Name = "btUndo";
-            this.btUndo.Size = new System.Drawing.Size(93, 47);
+            this.btUndo.Size = new System.Drawing.Size(89, 47);
             this.btUndo.TabIndex = 0;
             this.btUndo.UseVisualStyleBackColor = true;
             this.btUndo.Click += new System.EventHandler(this.btUndo_Click);
@@ -348,7 +347,7 @@ namespace DocumentManager
             this.treeViewContent.Location = new System.Drawing.Point(3, 3);
             this.treeViewContent.Name = "treeViewContent";
             this.treeViewContent.SelectedImageIndex = 0;
-            this.treeViewContent.Size = new System.Drawing.Size(294, 393);
+            this.treeViewContent.Size = new System.Drawing.Size(282, 393);
             this.treeViewContent.TabIndex = 0;
             this.treeViewContent.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeViewContent_AfterSelect);
             // 
@@ -365,13 +364,13 @@ namespace DocumentManager
             this.tabDocDetails.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tabDocDetails.Controls.Add(this.propertiesPanel, 0, 1);
             this.tabDocDetails.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabDocDetails.Location = new System.Drawing.Point(520, 3);
+            this.tabDocDetails.Location = new System.Drawing.Point(546, 3);
             this.tabDocDetails.Name = "tabDocDetails";
             this.tabDocDetails.RowCount = 3;
             this.tabDocDetails.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tabDocDetails.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tabDocDetails.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tabDocDetails.Size = new System.Drawing.Size(476, 511);
+            this.tabDocDetails.Size = new System.Drawing.Size(450, 511);
             this.tabDocDetails.TabIndex = 0;
             // 
             // propertiesPanel
@@ -387,8 +386,8 @@ namespace DocumentManager
             // propertiesPanel.Panel2
             // 
             this.propertiesPanel.Panel2.Controls.Add(this.tableLayoutPanel6);
-            this.propertiesPanel.Size = new System.Drawing.Size(470, 465);
-            this.propertiesPanel.SplitterDistance = 210;
+            this.propertiesPanel.Size = new System.Drawing.Size(444, 465);
+            this.propertiesPanel.SplitterDistance = 198;
             this.propertiesPanel.TabIndex = 2;
             // 
             // listViewParams
@@ -401,7 +400,7 @@ namespace DocumentManager
             this.listViewParams.Location = new System.Drawing.Point(0, 0);
             this.listViewParams.MultiSelect = false;
             this.listViewParams.Name = "listViewParams";
-            this.listViewParams.Size = new System.Drawing.Size(210, 465);
+            this.listViewParams.Size = new System.Drawing.Size(198, 465);
             this.listViewParams.TabIndex = 0;
             this.listViewParams.UseCompatibleStateImageBehavior = false;
             this.listViewParams.View = System.Windows.Forms.View.Details;
@@ -428,7 +427,7 @@ namespace DocumentManager
             this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 52.88583F));
             this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 40F));
             this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 7.272727F));
-            this.tableLayoutPanel6.Size = new System.Drawing.Size(256, 465);
+            this.tableLayoutPanel6.Size = new System.Drawing.Size(242, 465);
             this.tableLayoutPanel6.TabIndex = 0;
             // 
             // listEnumValues
@@ -439,7 +438,7 @@ namespace DocumentManager
             this.listEnumValues.Location = new System.Drawing.Point(10, 114);
             this.listEnumValues.Margin = new System.Windows.Forms.Padding(10);
             this.listEnumValues.Name = "listEnumValues";
-            this.listEnumValues.Size = new System.Drawing.Size(128, 121);
+            this.listEnumValues.Size = new System.Drawing.Size(120, 121);
             this.listEnumValues.TabIndex = 0;
             // 
             // txtParameterValue
@@ -449,7 +448,7 @@ namespace DocumentManager
             this.txtParameterValue.Location = new System.Drawing.Point(10, 248);
             this.txtParameterValue.Margin = new System.Windows.Forms.Padding(10, 3, 10, 3);
             this.txtParameterValue.Name = "txtParameterValue";
-            this.txtParameterValue.Size = new System.Drawing.Size(128, 20);
+            this.txtParameterValue.Size = new System.Drawing.Size(120, 20);
             this.txtParameterValue.TabIndex = 1;
             // 
             // flowLayoutPanel1
@@ -457,9 +456,9 @@ namespace DocumentManager
             this.flowLayoutPanel1.Controls.Add(this.btModify);
             this.flowLayoutPanel1.Controls.Add(this.btClear);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(151, 248);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(143, 248);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(102, 179);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(96, 179);
             this.flowLayoutPanel1.TabIndex = 3;
             // 
             // btModify

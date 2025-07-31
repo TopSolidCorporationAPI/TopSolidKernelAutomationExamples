@@ -49,7 +49,7 @@
     <Reference Include="System.Xml" />
     <Reference Include="TopSolid.Kernel.Automating">
       <SpecificVersion>false</SpecificVersion>
-	  <HintPath>$(OutputPath)\TopSolid.Kernel.Automating.dll</HintPath>
+      <HintPath>$(OutputPath)\TopSolid.Kernel.Automating.dll</HintPath>
       <Private>false</Private>
     </Reference>
   </ItemGroup>
@@ -62,6 +62,7 @@
     </Compile>
     <Compile Include="HelperClass.cs" />
     <Compile Include="Program.cs" />
+    <Compile Include="PdmObjectData.cs" />
     <Compile Include="ProjectData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Form1.resx">

@@ -166,6 +166,9 @@
   <data name="Document" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\icons\Document.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="DraftingDocument" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\icons\DraftingDocument.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="DrawingDocument" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\icons\DrawingDocument.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>

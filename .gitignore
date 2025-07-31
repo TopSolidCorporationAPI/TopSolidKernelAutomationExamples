@@ -4,7 +4,7 @@
 
 
 **/.vs/
-.Lib/
+**/Lib/
 /.vs/TopSolidKernelAutomationExamples/v16/.suo
 /.vs/VSWorkspaceState.json
 /TopSolidKernelAutomationExamples/DocumentManager/obj
