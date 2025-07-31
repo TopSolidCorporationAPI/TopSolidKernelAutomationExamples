@@ -3,4 +3,20 @@
 ################################################################################
 
 
-/TopSolidKernelAutomationExamples/.vs
+**/.vs/
+.Lib/
+/.vs/TopSolidKernelAutomationExamples/v16/.suo
+/.vs/VSWorkspaceState.json
+/TopSolidKernelAutomationExamples/DocumentManager/obj
+/TopSolidKernelAutomationExamples/ExportManager/obj
+/TopSolidKernelAutomationExamples/FamilyManager/obj
+/TopSolidKernelAutomationExamples/InclusionManager/obj
+/TopSolidKernelAutomationExamples/Lib/Logs
+/TopSolidKernelAutomationExamples/Lib/Parameter_Manager_TestData
+/TopSolidKernelAutomationExamples/ProjectOrganizer/obj
+/TopSolidKernelAutomationExamples/RevisionManager/obj
+/TopSolidKernelAutomationExamples/TopSolidAutomationControls/obj
+/TopSolidKernelAutomationExamples/.vs/TopSolidKernelAutomationExamples/v17/.suo
+/.vs/TopSolidKernelAutomationExamples/v16/.suo
+/.vs/slnx.sqlite
+/.vs/VSWorkspaceState.json
