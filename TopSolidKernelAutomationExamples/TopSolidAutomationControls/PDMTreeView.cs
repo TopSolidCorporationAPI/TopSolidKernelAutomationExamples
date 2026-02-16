@@ -97,14 +97,18 @@ namespace TopSolidAutomationControls
 
             // Abonnement de l'événement AfterCheck
             this.AfterCheck += new TreeViewEventHandler(treeView1_AfterCheck);
+			this.BeforeExpand += PDMTreeView_BeforeExpand;
 
-            FillTreeView();
+			this.SuspendLayout();
+			FillTreeView();
+			this.ResumeLayout();
 
-            // Abonnement de l'événement MouseDown pour gérer le clic droit
-            this.MouseDown += ProjectTreeview_MouseDown;
+			// Abonnement de l'événement MouseDown pour gérer le clic droit
+			this.MouseDown += ProjectTreeview_MouseDown;
         }
 
-        private void InitializeContextMenu()
+
+		private void InitializeContextMenu()
         {
             // Création du menu contextuel
             contextMenuStrip1 = new ContextMenuStrip();
@@ -180,127 +184,106 @@ namespace TopSolidAutomationControls
             }
         }
 
-        private void FillTreeView()
-        {
-            this.Nodes.Clear();
+		private void FillTreeView()
+		{
+			this.Nodes.Clear();
 
-            if (TopSolidHost.IsConnected)
-            {
-                TreeNode rootNode;
-                PdmObjectId currentProject = TopSolidHost.Pdm.GetCurrentProject();
+			if (TopSolidHost.IsConnected)
+			{
+				PdmObjectId currentProject = TopSolidHost.Pdm.GetCurrentProject();
+				if (currentProject.IsEmpty) return;
 
-                if (currentProject.IsEmpty) return;
+				TreeNode rootNode = new TreeNode(TopSolidHost.Pdm.GetName(currentProject))
+				{
+					Tag = currentProject
+				};
 
-                rootNode = new TreeNode(TopSolidHost.Pdm.GetName(currentProject));
-                rootNode.Tag = currentProject;
+				TopSolidHost.Pdm.GetConstituents(currentProject, out List<PdmObjectId> outFolderIds, out List<PdmObjectId> outDocumentIds);
 
-                TopSolidHost.Pdm.GetConstituents(currentProject, out List<PdmObjectId> outFolderIds, out List<PdmObjectId> outDocumentIds);
+				// Ajouter les dossiers (avec placeholder)
+				foreach (PdmObjectId folderId in outFolderIds)
+				{
+					TreeNode folderNode = new TreeNode(TopSolidHost.Pdm.GetName(folderId))
+					{
+						Tag = folderId,
+						ImageKey = "folder",
+						SelectedImageKey = "folder"
+					};
+					folderNode.Nodes.Add(new TreeNode("Loading..."));
+					rootNode.Nodes.Add(folderNode);
+				}
 
-                //Get all documents of all levels except the first one
-                foreach (PdmObjectId objectId in outFolderIds)
-                {
-                    TreeNode treeNode = new TreeNode(TopSolidHost.Pdm.GetName(objectId), 0, 0);
-                    treeNode.ImageIndex = 0;
-                    treeNode.ImageKey = "folder";
-                    treeNode.SelectedImageIndex = 0;
-                    treeNode.Tag = objectId;
-                    this.Nodes.Add(treeNode);
-                    GetAllSubDocuments(objectId, ref treeNode);
-                }
-                foreach (PdmObjectId objectId in outDocumentIds)
-                {
-                    bool showFile = true;
-                    TopSolidHost.Pdm.GetType(objectId, out string extension);
-                    if (documentTypes.Count() > 0 && !documentTypes.Contains(extension))
-                    {
-                        showFile = false;
-                    }
+				// Ajouter les documents (niveau racine)
+				foreach (PdmObjectId docId in outDocumentIds)
+				{
+					AddDocumentNode(rootNode, docId);
+				}
 
-                    if (showFile)
-                    {
-                        string documentTypeFromFile = "file";
-                        if (!TopSolidHost.Pdm.IsExternal(objectId))
-                        {
-                            string typeFullName = TopSolidHost.Documents.GetTypeFullName(TopSolidHost.Documents.GetDocument(objectId));
-                            int indexLastPoint = typeFullName.LastIndexOf('.');
-                            documentTypeFromFile = typeFullName.Substring(indexLastPoint + 1);
-                        }
-                        TopSolidHost.Pdm.GetType(objectId, out string extensionPdmObject);
-                        string imageKey = extensionPdmObject==null? "file": documentTypeFromFile.ToString();
+				this.Nodes.Add(rootNode);
+				SortNodes(this.Nodes);
+			}
+		}
 
-                        TreeNode treeNode = new TreeNode(TopSolidHost.Pdm.GetName(objectId), 1, 1)
-                        {
-                            ImageIndex = 1,
-                            Tag = objectId,
-                            SelectedImageKey = extensionList.Contains(imageKey) ? imageKey : "file",
-                            ImageKey = extensionList.Contains(imageKey)? imageKey :"file"
-                        };
+		private void PDMTreeView_BeforeExpand(object sender, TreeViewCancelEventArgs e)
+		{
+			TreeNode node = e.Node;
 
-                        this.Nodes.Add(treeNode);
-                    }
-                }
+			if (node.Nodes.Count == 1 && node.Nodes[0].Text == "Loading...")
+			{
+				node.Nodes.Clear();
 
-                SortNodes(this.Nodes);
-            }
-        }
+				PdmObjectId folderId = (PdmObjectId)node.Tag;
+				TopSolidHost.Pdm.GetConstituents(folderId, out List<PdmObjectId> outFolderIds, out List<PdmObjectId> outDocumentIds);
 
-        private void GetAllSubDocuments(PdmObjectId folderId, ref TreeNode inNode)
-        {
-            List<PdmObjectId> outFoldersList;
-            List<PdmObjectId> outDocumentList;
+				foreach (PdmObjectId subFolderId in outFolderIds)
+				{
+					TreeNode subFolderNode = new TreeNode(TopSolidHost.Pdm.GetName(subFolderId))
+					{
+						Tag = subFolderId,
+						ImageKey = "folder",
+						SelectedImageKey = "folder"
+					};
+					subFolderNode.Nodes.Add(new TreeNode("Loading..."));
+					node.Nodes.Add(subFolderNode);
+				}
 
-            //Get all documents and all folders of the first level
-            TopSolidHost.Pdm.GetConstituents(folderId, out outFoldersList, out outDocumentList);
+				foreach (PdmObjectId docId in outDocumentIds)
+				{
+					AddDocumentNode(node, docId);
+				}
 
-            //Get all documents of the first level
-            foreach (PdmObjectId objectId in outDocumentList)
-            {                 
-                bool showFile = true;
-                TopSolidHost.Pdm.GetType(objectId, out string extension);
-                if (documentTypes.Count() > 0 && !documentTypes.Contains(extension))
-                {
-                    showFile = false;
-                }
+				SortNodes(node.Nodes);
+			}
+		}
 
-                if (showFile)
-                {
-                    string documentTypeFromFile = "file";
-                    if (!TopSolidHost.Pdm.IsExternal(objectId))
-                    {
-                        string typeFullName = TopSolidHost.Documents.GetTypeFullName(TopSolidHost.Documents.GetDocument(objectId));
-                        int indexLastPoint = typeFullName.LastIndexOf('.');
-                        documentTypeFromFile = typeFullName.Substring(indexLastPoint + 1);                        
-                    }
-                    TopSolidHost.Pdm.GetType(objectId, out string extensionPdmObject);
-                    string imageKey = extensionPdmObject == null ? "file" : documentTypeFromFile.ToString();
-                    //List<string> extensionList = new List<string> { "PartDocument", ".TopAsm", ".TopFam" };
+		private void AddDocumentNode(TreeNode parent, PdmObjectId objectId)
+		{
+			TopSolidHost.Pdm.GetType(objectId, out string extension);
+			if (documentTypes.Length > 0 && !documentTypes.Contains(extension))
+				return;
 
-                    TreeNode treeNode = new TreeNode(TopSolidHost.Pdm.GetName(objectId), 1, 1)
-                    {
-                        ImageIndex = 1,
-                        Tag = objectId,
-                        SelectedImageKey = extensionList.Contains(imageKey) ? imageKey : "file",
-                        ImageKey = extensionList.Contains(imageKey) ? imageKey : "file",
-                    };
+			string documentTypeFromFile = "file";
+			if (!TopSolidHost.Pdm.IsExternal(objectId))
+			{
+				string typeFullName = TopSolidHost.Documents.GetTypeFullName(TopSolidHost.Documents.GetDocument(objectId));
+				int indexLastPoint = typeFullName.LastIndexOf('.');
+				documentTypeFromFile = typeFullName.Substring(indexLastPoint + 1);
+			}
 
-                    inNode.Nodes.Add(treeNode);
-                }
-            }
+			TopSolidHost.Pdm.GetType(objectId, out string extensionPdmObject);
+			string imageKey = extensionPdmObject == null ? "file" : documentTypeFromFile;
 
-            //Redo the method to get all sub sub documents
-            foreach (PdmObjectId objectId in outFoldersList)
-            {
-                TreeNode treeNode = new TreeNode(TopSolidHost.Pdm.GetName(objectId), 0, 0);
-                treeNode.Tag = objectId;
-                treeNode.ImageKey = "folder";
-                treeNode.ImageIndex = 0;
-                treeNode.SelectedImageIndex =0;
-                inNode.Nodes.Add(treeNode);
-                GetAllSubDocuments(objectId, ref treeNode);
-            }
-        }
+			TreeNode docNode = new TreeNode(TopSolidHost.Pdm.GetName(objectId), 1, 1)
+			{
+				Tag = objectId,
+				ImageKey = extensionList.Contains(imageKey) ? imageKey : "file",
+				SelectedImageKey = extensionList.Contains(imageKey) ? imageKey : "file"
+			};
 
-        private void treeView1_AfterCheck(object sender, TreeViewEventArgs e)
+			parent.Nodes.Add(docNode);
+		}
+
+		private void treeView1_AfterCheck(object sender, TreeViewEventArgs e)
         {
             // Prevent recursive event triggering
             this.AfterCheck -= treeView1_AfterCheck;
