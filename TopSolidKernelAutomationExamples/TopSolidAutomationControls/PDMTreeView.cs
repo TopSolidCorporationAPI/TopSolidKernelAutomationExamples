@@ -230,6 +230,8 @@ namespace TopSolidAutomationControls
 
 			if (node.Nodes.Count == 1 && node.Nodes[0].Text == "Loading...")
 			{
+				bool parentChecked = node.Checked;
+
 				node.Nodes.Clear();
 
 				PdmObjectId folderId = (PdmObjectId)node.Tag;
@@ -241,7 +243,8 @@ namespace TopSolidAutomationControls
 					{
 						Tag = subFolderId,
 						ImageKey = "folder",
-						SelectedImageKey = "folder"
+						SelectedImageKey = "folder",
+                        Checked=parentChecked
 					};
 					subFolderNode.Nodes.Add(new TreeNode("Loading..."));
 					node.Nodes.Add(subFolderNode);
@@ -249,14 +252,14 @@ namespace TopSolidAutomationControls
 
 				foreach (PdmObjectId docId in outDocumentIds)
 				{
-					AddDocumentNode(node, docId);
+					AddDocumentNode(node, docId, parentChecked);
 				}
 
 				SortNodes(node.Nodes);
 			}
 		}
 
-		private void AddDocumentNode(TreeNode parent, PdmObjectId objectId)
+		private void AddDocumentNode(TreeNode parent, PdmObjectId objectId, bool isChecked = false)
 		{
 			TopSolidHost.Pdm.GetType(objectId, out string extension);
 			if (documentTypes.Length > 0 && !documentTypes.Contains(extension))
@@ -277,7 +280,8 @@ namespace TopSolidAutomationControls
 			{
 				Tag = objectId,
 				ImageKey = extensionList.Contains(imageKey) ? imageKey : "file",
-				SelectedImageKey = extensionList.Contains(imageKey) ? imageKey : "file"
+				SelectedImageKey = extensionList.Contains(imageKey) ? imageKey : "file",
+				Checked = isChecked
 			};
 
 			parent.Nodes.Add(docNode);

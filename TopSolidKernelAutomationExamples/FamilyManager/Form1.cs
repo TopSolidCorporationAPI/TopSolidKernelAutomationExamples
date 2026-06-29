@@ -186,14 +186,14 @@ namespace FamilyManager
             {
                 TopSolidHost.Application.EndModification(false, false);
             }
-            TopSolidHost.Pdm.DeleteSeveral(new List<PdmObjectId>{ assemblyDocumentPdm });
+            TopSolidHost.Pdm.DeleteSeveral(new List<PdmObjectId> { assemblyDocumentPdm });
 
             return occurenceFirstDefinition;
         }
 
         private void PurgeDocuments()
         {
-            if (checkedDocuments.Count>0 && chkPurgeOriginalFiles.Checked)
+            if (checkedDocuments.Count > 0 && chkPurgeOriginalFiles.Checked)
             {
                 List<PdmObjectId> objectsToDelete = new List<PdmObjectId>();
                 for (int i = 0; i < checkedDocuments.Count; ++i)
@@ -379,7 +379,7 @@ namespace FamilyManager
 
                 if (!TopSolidHost.Families.IsExplicit(family)) continue;
 
-                if (TopSolidHost.Families.GetGenericDocument(family)!=DocumentId.Empty) continue;
+                if (TopSolidHost.Families.GetGenericDocument(family) != DocumentId.Empty) continue;
 
                 List<string> codes = TopSolidHost.Families.GetCodes(family);
 
@@ -508,6 +508,58 @@ namespace FamilyManager
             if (e.Node.Tag == null) return;
 
             UpdatePreview(e);
+        }
+
+        private void btCreateFamily_Click(object sender, EventArgs e)
+        {
+            checkedDocuments = new List<PdmObjectId>();
+            if (pdmTreeView1.Nodes.Count > 0)
+            {
+                GetCheckedDocuments(pdmTreeView1.Nodes, ref checkedDocuments);
+            }
+
+            if (checkedDocuments.Count == 0) return;
+
+            //tri sur la sélection
+            List<PdmObjectId> singlePartOrAssemblyDocuments = checkedDocuments
+                .Where(x =>
+                {
+                    TopSolidHost.Pdm.GetType(x, out string outExtension);
+                    return (outExtension == ".TopPrt" || outExtension == ".TopAsm");
+                })
+                .ToList();
+
+            foreach (PdmObjectId singleDoc in singlePartOrAssemblyDocuments)
+            {
+				PdmObjectId familyDocument = TopSolidHost.Pdm.CreateDocument(TopSolidHost.Pdm.GetCurrentProject(), ".TopFam", true);
+
+				if (familyDocument.IsEmpty) return;
+
+				TopSolidHost.Pdm.SetName(familyDocument, TopSolidHost.Documents.GetName(TopSolidHost.Documents.GetDocument(singleDoc)));
+
+				TopSolidHost.Pdm.Save(familyDocument, true);
+
+                DocumentId familyId = TopSolidHost.Documents.GetDocument(familyDocument);
+
+				try
+				{
+					TopSolidHost.Application.StartModification("family doc set instance", false);
+					TopSolidHost.Documents.EnsureIsDirty(ref familyId);
+
+					TopSolidHost.Families.SetGenericDocument(familyId, TopSolidHost.Documents.GetDocument(singleDoc), DocumentId.Empty);
+
+					TopSolidHost.Application.EndModification(true, true);
+				}
+				catch (Exception ee)
+				{
+					TopSolidHost.Application.EndModification(false, false);
+				}
+
+				TopSolidHost.Pdm.Save(familyDocument, true);
+
+                //déplace le doc
+                TopSolidHost.Pdm.MoveSeveral(new List<PdmObjectId> { familyDocument }, TopSolidHost.Pdm.GetOwner(singleDoc));
+			}
         }
     }
 }
