@@ -531,6 +531,29 @@ namespace FamilyManager
 
             foreach (PdmObjectId singleDoc in singlePartOrAssemblyDocuments)
             {
+                DocumentId singleDocId = TopSolidHost.Documents.GetDocument(singleDoc);
+                if (!singleDocId.IsEmpty)
+                {
+                    bool isvirtual = TopSolidHost.Documents.IsVirtualDocument(singleDocId);
+                    if (!isvirtual)
+                    {
+                        try
+                        {
+							TopSolidHost.Application.StartModification("set virtual", false);
+							TopSolidHost.Documents.EnsureIsDirty(ref singleDocId);
+
+                            TopSolidHost.Documents.SetVirtualDocumentMode(singleDocId,true);
+
+							TopSolidHost.Application.EndModification(true, true);
+						}
+                        catch (Exception)
+                        {
+							TopSolidHost.Application.EndModification(false, false);
+                            continue;
+						}
+                    }
+                }
+
 				PdmObjectId familyDocument = TopSolidHost.Pdm.CreateDocument(TopSolidHost.Pdm.GetCurrentProject(), ".TopFam", true);
 
 				if (familyDocument.IsEmpty) return;
